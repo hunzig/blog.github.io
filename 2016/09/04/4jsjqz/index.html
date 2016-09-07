@@ -1,0 +1,606 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="4.3数据恢复技术：（物理恢复和逻辑恢复）删除的文件文件目录存在、数据区均完整（文件快速恢复）
+文件目录不存在、数据区完整（文件签名恢复）
+文件目录不存在、数据区不完整（关键词搜索手工恢复）
+文件签名恢复取证软件支持从未分配簇中恢复制定类型的文件exe文件 ：  4D 5Aoffice文件 ： D0 CF 11 E0 A1 B1 1A E1 00 00zip文件  : 50 4B 03 04jpg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机取证">
+<meta property="og:url" content="http://hack70.com/2016/09/04/4jsjqz/index.html">
+<meta property="og:site_name" content="hack70">
+<meta property="og:description" content="4.3数据恢复技术：（物理恢复和逻辑恢复）删除的文件文件目录存在、数据区均完整（文件快速恢复）
+文件目录不存在、数据区完整（文件签名恢复）
+文件目录不存在、数据区不完整（关键词搜索手工恢复）
+文件签名恢复取证软件支持从未分配簇中恢复制定类型的文件exe文件 ：  4D 5Aoffice文件 ： D0 CF 11 E0 A1 B1 1A E1 00 00zip文件  : 50 4B 03 04jpg">
+<meta property="og:updated_time" content="2016-09-04T08:09:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机取证">
+<meta name="twitter:description" content="4.3数据恢复技术：（物理恢复和逻辑恢复）删除的文件文件目录存在、数据区均完整（文件快速恢复）
+文件目录不存在、数据区完整（文件签名恢复）
+文件目录不存在、数据区不完整（关键词搜索手工恢复）
+文件签名恢复取证软件支持从未分配簇中恢复制定类型的文件exe文件 ：  4D 5Aoffice文件 ： D0 CF 11 E0 A1 B1 1A E1 00 00zip文件  : 50 4B 03 04jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hack70.com/2016/09/04/4jsjqz/"/>
+
+  <title> 计算机取证 | hack70 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">hack70</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                计算机取证
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-04T09:16:25+00:00" content="2016-09-04">
+              2016-09-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/forensics/" itemprop="url" rel="index">
+                    <span itemprop="name">forensics</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="4-3数据恢复技术：（物理恢复和逻辑恢复）"><a href="#4-3数据恢复技术：（物理恢复和逻辑恢复）" class="headerlink" title="4.3数据恢复技术：（物理恢复和逻辑恢复）"></a>4.3数据恢复技术：（物理恢复和逻辑恢复）</h2><h3 id="删除的文件"><a href="#删除的文件" class="headerlink" title="删除的文件"></a>删除的文件</h3><p>文件目录存在、数据区均完整（文件快速恢复）</p>
+<p>文件目录不存在、数据区完整（文件签名恢复）</p>
+<p>文件目录不存在、数据区不完整（关键词搜索手工恢复）</p>
+<h3 id="文件签名恢复"><a href="#文件签名恢复" class="headerlink" title="文件签名恢复"></a>文件签名恢复</h3><p>取证软件支持从未分配簇中恢复制定类型的文件<br>exe文件 ：  4D 5A<br>office文件 ： D0 CF 11 E0 A1 B1 1A E1 00 00<br>zip文件  : 50 4B 03 04<br>jpg文件： \xFF\xD8\xFF\xE0</p>
+<ul>
+<li>TXT文件没有特定的文件签名信息</li>
+</ul>
+<h3 id="分区格式化恢复"><a href="#分区格式化恢复" class="headerlink" title="分区格式化恢复"></a>分区格式化恢复</h3><p><strong>windows文件系统结构</strong><br>fat：DBR+根目录+数据区   （DBR+根目录=FAT表），格式化时FAT表破坏 数据区可恢复<br>NTFS文件系统结构：BOOT  元文件  MFT   MFTMirr   备份DBR （MFT破坏其他绝大多数可恢复）<br>勘察工具里选数据恢复—格式化恢复—选择被格式化盘符（或全选）</p>
+<h3 id="分区丢失恢复"><a href="#分区丢失恢复" class="headerlink" title="分区丢失恢复"></a>分区丢失恢复</h3><p><strong>丢失分区原因</strong>: 主引导记录MBR扇区损坏、扩展引导记录EBR扇区损坏、分区误删除、误分区、误ghost<br><strong>丢失分区的恢复方法</strong>：人工寻址手工修复MBR EBR DBR、分析丢失分区工具取证大师 encase ftk xways等软件<br>（添加设备时候勾选恢复丢失分区或数据恢复按钮再选分区恢复）</p>
+<h3 id="RAID重组"><a href="#RAID重组" class="headerlink" title="RAID重组"></a>RAID重组</h3><p>RAID0、1、5、6、HP双循环<br>raid0 分块存储、读取速度快、缺点只要一块盘坏数据就损坏<br>raid1 镜像磁盘、存储空间只有一半<br>raid5 校验信息分布存储、存储能力n-1、至少三块一样硬盘、XOR异或运算<br>       raid5重组三要素：类型、顺序、条带大小</p>
+<h3 id="碎片重组"><a href="#碎片重组" class="headerlink" title="碎片重组"></a>碎片重组</h3><h3 id="物理修复"><a href="#物理修复" class="headerlink" title="物理修复"></a>物理修复</h3><hr>
+<h2 id="4-4加解密技术"><a href="#4-4加解密技术" class="headerlink" title="4.4加解密技术"></a>4.4加解密技术</h2><h3 id="EFS加密技术取证"><a href="#EFS加密技术取证" class="headerlink" title="EFS加密技术取证"></a>EFS加密技术取证</h3><p>文件型加密、分区加密、全盘加密、物理介质加密、信息隐写技术<br>高级属性–选取加密内容一遍保护数据，文件名变成绿色，只针对win下ntfs格式文件系统<br>EFS加密基于公钥策略，如果登录到域环境中，密钥的生成依赖域控制器或者本地计算机（其他用户无权查看）<br><strong>解密方式</strong>：利用加密的用户名和密码登录浏览、利用计算机中备份的证书文件进行解密（证书文件一般也设置了密码）<br><strong>解密过程</strong>：1、先过滤出EFS加密文件，右键点解密，输入密钥<br>2、取证结果中查看个人证书efs.pfx,然后导出，再次导入</p>
+<h3 id="加密容器技术取证"><a href="#加密容器技术取证" class="headerlink" title="加密容器技术取证"></a>加密容器技术取证</h3><p>加密容器采用较强加密算法，如对成加密算法AES-256。可创建加密型容器文件、创建分区加密、创建全盘加密<br>常见加密容器文件默认扩展名为：</p>
+<ul>
+<li>PGP Desktop :  *.pgd  有文件头特征，可通过签名分析发现</li>
+<li>TrueCrypt : *.tc   无文件头部和尾部特征</li>
+<li>Private Disk : *.dpd  无文件头部特征，只有尾部特征</li>
+<li>BestCrypt : *.jbc  有文件头部特征，可通过签名分析发现<br>发现途径： 过滤1GB以上大文件，然后逐一排查。 或利用第三方软件 tchunt</li>
+</ul>
+<h3 id="bitlocker加密技术取证"><a href="#bitlocker加密技术取证" class="headerlink" title="bitlocker加密技术取证"></a>bitlocker加密技术取证</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/02/hexo-zhuanyi/" rel="next" title="hexo转移到其他电脑">
+                <i class="fa fa-chevron-left"></i> hexo转移到其他电脑
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/04/dSploit/" rel="prev" title="手机内网渗透工具dSploit的简易使用">
+                手机内网渗透工具dSploit的简易使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="hack70" />
+          <p class="site-author-name" itemprop="name">hack70</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3数据恢复技术：（物理恢复和逻辑恢复）"><span class="nav-number">1.</span> <span class="nav-text">4.3数据恢复技术：（物理恢复和逻辑恢复）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除的文件"><span class="nav-number">1.1.</span> <span class="nav-text">删除的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件签名恢复"><span class="nav-number">1.2.</span> <span class="nav-text">文件签名恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区格式化恢复"><span class="nav-number">1.3.</span> <span class="nav-text">分区格式化恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区丢失恢复"><span class="nav-number">1.4.</span> <span class="nav-text">分区丢失恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID重组"><span class="nav-number">1.5.</span> <span class="nav-text">RAID重组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#碎片重组"><span class="nav-number">1.6.</span> <span class="nav-text">碎片重组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理修复"><span class="nav-number">1.7.</span> <span class="nav-text">物理修复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4加解密技术"><span class="nav-number">2.</span> <span class="nav-text">4.4加解密技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EFS加密技术取证"><span class="nav-number">2.1.</span> <span class="nav-text">EFS加密技术取证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密容器技术取证"><span class="nav-number">2.2.</span> <span class="nav-text">加密容器技术取证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bitlocker加密技术取证"><span class="nav-number">2.3.</span> <span class="nav-text">bitlocker加密技术取证</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hack70</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

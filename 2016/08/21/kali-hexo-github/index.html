@@ -1,0 +1,650 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo,blog," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写博客应该是非常遥远的一件事情了。为什么过了这么多年会突然重新启用一个博客？这不是对青春的祭奠。而是自己越来越感觉做笔记的重要性，如果没有笔记，随着时间流逝，原本你掌握的技能也会遗忘。于是就想把自己在电脑学习过程中接触到的知识点进行记录，有空可以翻看。
+构建环境：pc kali系统和树莓派kali系统上均测试过，起初将hexo部署在树莓派上，因为性能差网页访问速度不尽如人意。于是最终转移到了gi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo建站（kali+hexo+github）">
+<meta property="og:url" content="http://hack70.com/2016/08/21/kali-hexo-github/index.html">
+<meta property="og:site_name" content="hack70">
+<meta property="og:description" content="写博客应该是非常遥远的一件事情了。为什么过了这么多年会突然重新启用一个博客？这不是对青春的祭奠。而是自己越来越感觉做笔记的重要性，如果没有笔记，随着时间流逝，原本你掌握的技能也会遗忘。于是就想把自己在电脑学习过程中接触到的知识点进行记录，有空可以翻看。
+构建环境：pc kali系统和树莓派kali系统上均测试过，起初将hexo部署在树莓派上，因为性能差网页访问速度不尽如人意。于是最终转移到了gi">
+<meta property="og:updated_time" content="2016-09-04T03:34:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo建站（kali+hexo+github）">
+<meta name="twitter:description" content="写博客应该是非常遥远的一件事情了。为什么过了这么多年会突然重新启用一个博客？这不是对青春的祭奠。而是自己越来越感觉做笔记的重要性，如果没有笔记，随着时间流逝，原本你掌握的技能也会遗忘。于是就想把自己在电脑学习过程中接触到的知识点进行记录，有空可以翻看。
+构建环境：pc kali系统和树莓派kali系统上均测试过，起初将hexo部署在树莓派上，因为性能差网页访问速度不尽如人意。于是最终转移到了gi">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hack70.com/2016/08/21/kali-hexo-github/"/>
+
+  <title> Hexo建站（kali+hexo+github） | hack70 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">hack70</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hexo建站（kali+hexo+github）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-21T16:16:25+00:00" content="2016-08-21">
+              2016-08-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>写博客应该是非常遥远的一件事情了。为什么过了这么多年会突然重新启用一个博客？这不是对青春的祭奠。而是自己越来越感觉做笔记的重要性，如果没有笔记，随着时间流逝，原本你掌握的技能也会遗忘。于是就想把自己在电脑学习过程中接触到的知识点进行记录，有空可以翻看。</p>
+<p>构建环境：pc kali系统和树莓派kali系统上均测试过，起初将hexo部署在树莓派上，因为性能差网页访问速度不尽如人意。于是最终转移到了github，没想到服务器虽然在国外，但是访问速度非常不错。当然这和我用的极简风格 <strong>屠城</strong> 主题也有一点关系。</p>
+</blockquote>
+<p><em>hexo</em> 基于makedown编写，只要写好md文件，在本机的blog目录执行  hexo g &amp;&amp;  hexo  d ，就把博文更新到网站上了。</p>
+<a id="more"></a>
+<h2 id="0x00-安装准备"><a href="#0x00-安装准备" class="headerlink" title="0x00 安装准备"></a>0x00 安装准备</h2><h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><p>安装Node最好的方式是使用nvm进行安装，首先从git上克隆nvm项目:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@jack:~# git clone https://github.com/creationix/nvm.git ~/.nvm &amp;&amp; cd ~/.nvm &amp;&amp; git checkout `git describe --abbrev=0 --tags`</div></pre></td></tr></table></figure>
+<p>克隆完成使用,使用source命令，激活nvm:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@jack:~# . ~/.nvm/nvm.sh</div></pre></td></tr></table></figure></p>
+<p>然后在～/.bashrc添加nvm全局变量:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</div></pre></td></tr></table></figure>
+<p>ok,搞定，开始安装nvm:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root@jack:~# nvm install 5.0</div><div class="line">Downloading https://nodejs.org/dist/v5.0.0/node-v5.0.0-linux-x64.tar.xz...</div></pre></td></tr></table></figure>
+<p>启动nvm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root@jack:~# nvm use 5.0</div><div class="line">Now using node v5.0.0 (npm v3.3.6)</div></pre></td></tr></table></figure>
+<h3 id="uninstal-nvm"><a href="#uninstal-nvm" class="headerlink" title="uninstal nvm"></a>uninstal nvm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rm -rf ~/.nvm</div><div class="line">rm -rf ~/.npm</div><div class="line">rm -rf ~/.bower</div></pre></td></tr></table></figure>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>当然，kali已经默认安装git了。<br>ubuntu安装git:sudo apt-get install git-core</p>
+<hr>
+<h2 id="0x01-安装Hexo"><a href="#0x01-安装Hexo" class="headerlink" title="0x01 安装Hexo"></a>0x01 安装Hexo</h2><p>一切准备就绪，开始安装Hexo吧:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root@jack:~# mkdir MyBlog #新建一个MyBlog目录,作为博客的存放地</div><div class="line">root@jack:~/MyBlog# npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
+<p>等待Hexo安装完毕，然后依次使用以下命令对hexo进行初始配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root@jack:~/MyBlog# hexo init hexo</div><div class="line">INFO  Start blogging with Hexo!</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="0x02-建站配置"><a href="#0x02-建站配置" class="headerlink" title="0x02 建站配置"></a>0x02 建站配置</h2><h3 id="Hexo建站"><a href="#Hexo建站" class="headerlink" title="Hexo建站"></a>Hexo建站</h3><p>Hexo安装完毕以后依次执行以下命令可以建立Hexo站了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">root@jack:~/MyBlog# hexo init hexo  #执行命令时没有“&lt;&gt;”</div><div class="line">#新建一个网站。如果没有设置 folder ，Hexo 默认在目前的文件夹建立网站，&quot;hexo&quot;文件夹即是我们的博客网站。</div><div class="line">root@jack:~/MyBlog# cd hexo/</div><div class="line">root@jack:~/MyBlog/hexo# npm install</div><div class="line">#Hexo随后会自动在目标文件夹建立网站所需要的配置文件</div><div class="line">root@jack:~/MyBlog/hexo# hexo generate</div><div class="line">#生成静态文件</div><div class="line">root@jack:~/MyBlog/hexo# hexo server</div><div class="line">INFO  Start processing</div><div class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</div><div class="line">#启动hexo本地服务器访问网址为： http://localhost:4000/</div></pre></td></tr></table></figure>
+<h3 id="配置Hexo主题"><a href="#配置Hexo主题" class="headerlink" title="配置Hexo主题"></a>配置Hexo主题</h3><p>以hexo下的huno主题为例:<a href="https://github.com/onejustone/huno" target="_blank" rel="external">https://github.com/onejustone/huno</a></p>
+<p>在当前目录中/root/MyBlog/hexo<br>{即已经部署了hexo基本配置文件的文件夹}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@jack:~/MyBlog/hexo# git clone git://github.com/someus/huno.git themes/huno</div></pre></td></tr></table></figure></p>
+<p>然后更改更目录下_config.yml的theme属性为:huno即可更换主题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">root@jack:~/MyBlog/hexo# vim _config.yml </div><div class="line"></div><div class="line"># Extensions</div><div class="line">## Plugins: https://hexo.io/plugins/</div><div class="line">## Themes: https://hexo.io/themes/</div><div class="line">theme: huno</div></pre></td></tr></table></figure></p>
+<p>用浏览器打开localhost:4000查看是否成功！</p>
+<p>其它主题:<br>Maupassant一款极简的主题:</p>
+<h2 id="https-github-com-tufu9441-maupassant-hexo"><a href="#https-github-com-tufu9441-maupassant-hexo" class="headerlink" title="https://github.com/tufu9441/maupassant-hexo/"></a><a href="https://github.com/tufu9441/maupassant-hexo/" target="_blank" rel="external">https://github.com/tufu9441/maupassant-hexo/</a></h2><h2 id="0x03-第一篇文章"><a href="#0x03-第一篇文章" class="headerlink" title="0x03 第一篇文章"></a>0x03 第一篇文章</h2><p>执行下列命令来创建一篇新文章<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new [layout] &lt;title&gt;</div></pre></td></tr></table></figure></p>
+<p>我们可以在命令中指定文章的布局（layout），默认为 post，可以通过修改 _config.yml 中的 default_layout 参数来指定默认布局。</p>
+<hr>
+<h2 id="0x04-部署Hexo"><a href="#0x04-部署Hexo" class="headerlink" title="0x04 部署Hexo"></a>0x04 部署Hexo</h2><h3 id="配置和使用Github"><a href="#配置和使用Github" class="headerlink" title="配置和使用Github"></a>配置和使用Github</h3><p>Git安装完成后注册Github账号:<a href="http://www.github.com/" target="_blank" rel="external">http://www.github.com/</a><br>github上创建onejustone.git.io仓库<br>以建立个人博客登录后系统，在github首页，点击页面右下角「New Repository」project name:onejustone.github.io<br>description:–保持自己的独立思维–<br>要在Pages上建立个人博客，Repository名字是特定的，即是必须是user_name.github.io的形式！点击【Creat Repository】完成创建，之后通过<a href="http://onejustone.github.io" target="_blank" rel="external">http://onejustone.github.io</a> 去访问我们的博客页面!</p>
+<p>通过SSH keys让本地git项目与远程的github建立联系:</p>
+<p>首先我们需要检查你电脑上现有的ssh key:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd ~/. ssh 检查本机的ssh密钥</div><div class="line"># 如果提示：No such file or directory 说明你是第一次使用git。</div></pre></td></tr></table></figure>
+<p>生成新的SSH Key：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot;</div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;</div><div class="line"></div><div class="line">注意1: 此处的邮箱地址，你可以输入自己的邮箱地址；注意2: 此处的「-C」的是大写的「C」</div><div class="line"></div><div class="line">然后系统会要你输入密码：</div><div class="line"></div><div class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt;</div><div class="line">Enter same passphrase again:&lt;再次输入加密串&gt;</div><div class="line"></div><div class="line">在回车中会提示你输入一个密码，这个密码会在你提交项目时使用，如果为空的话提交项目时则不用输入。这个设置是防止别人往你的项目里提交内容。</div><div class="line"></div><div class="line">注意：输入密码的时候没有*字样的，你直接输入就可以了。</div></pre></td></tr></table></figure></p>
+<p>最后看到这样的界面，就成功设置ssh key了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">root@jack:~# cd ~/.ssh</div><div class="line">bash: cd: /root/.ssh: 没有那个文件或目录</div><div class="line">root@jack:~#  ssh-keygen -t rsa -C &quot;807527097@qq.com&quot;</div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file in which to save the key (/root/.ssh/id_rsa):       </div><div class="line">Created directory &apos;/root/.ssh&apos;.</div><div class="line">Enter passphrase (empty for no passphrase): </div><div class="line">Enter same passphrase again: </div><div class="line">Your identification has been saved in /root/.ssh/id_rsa.</div><div class="line">Your public key has been saved in /root/.ssh/id_rsa.pub.</div><div class="line">The key fingerprint is:</div><div class="line">4f:1c:9c:fa:91:53:8f:d2:16:9c:2b:6a:76:8a:3c:9b 807527097@qq.com</div><div class="line">The key&apos;s randomart image is:</div><div class="line">+---[RSA 2048]----+</div><div class="line">|                 |</div><div class="line">|         . o .   |</div><div class="line">|          + =    |</div><div class="line">|         o = =   |</div><div class="line">|        S O = .  |</div><div class="line">|         = *     |</div><div class="line">|        + +      |</div><div class="line">|     ..= o       |</div><div class="line">|      Eo.        |</div><div class="line">+-----------------+</div></pre></td></tr></table></figure></p>
+<h3 id="配置SSH-keys"><a href="#配置SSH-keys" class="headerlink" title="配置SSH keys"></a>配置SSH keys</h3><p>生成SSH keys以后:</p>
+<ul>
+<li>将id_rsa.pub里的字符复制下，准备添加到GitHub的SSH keys里。</li>
+<li>登陆github系统。点击右上角的 Settings—&gt;SSH keys —&gt; New SSH key</li>
+<li>把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了 </li>
+</ul>
+<hr>
+<h3 id="测试SSH-keys"><a href="#测试SSH-keys" class="headerlink" title="测试SSH keys"></a>测试SSH keys</h3><p>可以输入下面的命令，看看设置是否成功，git@github.com的部分不要修改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div><div class="line"></div><div class="line">如果是下面的反馈：</div><div class="line">The authenticity of host &apos;github.com (207.97.227.239)&apos; can&apos;t be established.</div><div class="line">RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.Are you sure you want to continue connecting (yes/no)?</div><div class="line">不要紧张，输入yes就好(此处会提示你输入刚才设置的密码)，然后会看到：</div><div class="line">Hi onejustone! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</div></pre></td></tr></table></figure></p>
+<h3 id="设置用户信息"><a href="#设置用户信息" class="headerlink" title="设置用户信息"></a>设置用户信息</h3><p>现在你已经可以通过SSH链接到GitHub了，还有一些个人信息需要完善的。</p>
+<p>Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的，名字必须是你的真名，而不是GitHub的昵称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;jack&quot;//用户名</div><div class="line">$ git config --global user.email  &quot;onejustone@gmail.com&quot;//写自己的邮箱</div><div class="line">SSH Key配置成功</div></pre></td></tr></table></figure>
+<p>ok,本机已成功连接到github。</p>
+<hr>
+<h3 id="将Hexo部署到Github"><a href="#将Hexo部署到Github" class="headerlink" title="将Hexo部署到Github"></a>将Hexo部署到Github</h3><p>部署到github需要安装一个插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@jack:~/MyBlog/hexo#  npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<p>然后，进入MyBlog/hexo根目录下对_config.yml文件进行配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">root@jack:~/MyBlog/hexo# vim _config.yml </div><div class="line"># Deployment</div><div class="line">## Docs: https://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: git@github.com:onejustone/onejustone.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>博主这里使用的是SSH Keys如果你用了https Keys的话直接在github里复制https的就行了，总共就两种协议。</p>
+<p>然后命令行进入MyBlog/hexo里:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
+<p>ok，我们的小窝棚已经基本搭建好了，现在可以访问你的个人github页面查看一把了我的是<a href="http://onejustone.github.io" target="_blank" rel="external">http://onejustone.github.io</a> 对应的将onejustone改成你自己的github账户名就行了！</p>
+<hr>
+<h2 id="0x05-绑定域名"><a href="#0x05-绑定域名" class="headerlink" title="0x05 绑定域名"></a>0x05 绑定域名</h2><ul>
+<li>GitHub Pages的设置:在onejustone.github.io Repository的根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，比如www.onejustone.xyz.</li>
+<li>阿里万维网下注册域名:<a href="http://wanwang.aliyun.com/domain,然后登陆阿里云控制台，找到“云解析”，选择解析设置，点击新手设置，添加gitpages的IP地址" target="_blank" rel="external">http://wanwang.aliyun.com/domain,然后登陆阿里云控制台，找到“云解析”，选择解析设置，点击新手设置，添加gitpages的IP地址</a>: 192.30.252.153</li>
+<li>通过浏览器，访问<a href="http://www.onejustone.xyz，" target="_blank" rel="external">http://www.onejustone.xyz，</a> 就打开了我们建好的博客站点。</li>
+<li>为防止hexo部署后，CNAME会被自动删除，需要在source文件夹，创建CNAME(同时favicon.ico、images也可以在<br>source文件下创建).</li>
+</ul>
+<hr>
+<h2 id="0x06-关于windows下中文乱码问题"><a href="#0x06-关于windows下中文乱码问题" class="headerlink" title="0x06 关于windows下中文乱码问题"></a>0x06 关于windows下中文乱码问题</h2><p>在编辑文件的时候将文本的保存格式设置为UTF8格式保存！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+            <a href="/tags/blog/" rel="tag">#blog</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/25/raspberry_mianliu/" rel="prev" title="(原创)树莓派搭建免流服务器">
+                (原创)树莓派搭建免流服务器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="hack70" />
+          <p class="site-author-name" itemprop="name">hack70</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-安装准备"><span class="nav-number">1.</span> <span class="nav-text">0x00 安装准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装node-js"><span class="nav-number">1.1.</span> <span class="nav-text">安装node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uninstal-nvm"><span class="nav-number">1.2.</span> <span class="nav-text">uninstal nvm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Git"><span class="nav-number">1.3.</span> <span class="nav-text">安装Git</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装Hexo"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-建站配置"><span class="nav-number">3.</span> <span class="nav-text">0x02 建站配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo建站"><span class="nav-number">3.1.</span> <span class="nav-text">Hexo建站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Hexo主题"><span class="nav-number">3.2.</span> <span class="nav-text">配置Hexo主题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https-github-com-tufu9441-maupassant-hexo"><span class="nav-number">4.</span> <span class="nav-text">https://github.com/tufu9441/maupassant-hexo/</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-第一篇文章"><span class="nav-number">5.</span> <span class="nav-text">0x03 第一篇文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-部署Hexo"><span class="nav-number">6.</span> <span class="nav-text">0x04 部署Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置和使用Github"><span class="nav-number">6.1.</span> <span class="nav-text">配置和使用Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置SSH-keys"><span class="nav-number">6.2.</span> <span class="nav-text">配置SSH keys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试SSH-keys"><span class="nav-number">6.3.</span> <span class="nav-text">测试SSH keys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置用户信息"><span class="nav-number">6.4.</span> <span class="nav-text">设置用户信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将Hexo部署到Github"><span class="nav-number">6.5.</span> <span class="nav-text">将Hexo部署到Github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-绑定域名"><span class="nav-number">7.</span> <span class="nav-text">0x05 绑定域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-关于windows下中文乱码问题"><span class="nav-number">8.</span> <span class="nav-text">0x06 关于windows下中文乱码问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hack70</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

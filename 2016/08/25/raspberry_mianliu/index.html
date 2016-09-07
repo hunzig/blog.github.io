@@ -1,0 +1,639 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="免流,raspberry," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="根据网上教程自己全程搭建，网上教程鱼龙混杂，只有自己做过才知道对错
+思路：openvpn + squid代理 +客户端免流配置文件   从而达到免流效果
+实际上根据后期我在华硕路由器上搭建的经验来看，哪怕squid代理这一步不做，应该是照样也可以免流(无非就是不太稳定而已)
+这里要注意的是如果用了squid，对应的端口必须是80 或者8080 ，而且需要做映射。我一开始没有用8080端口，导致免">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(原创)树莓派搭建免流服务器">
+<meta property="og:url" content="http://hack70.com/2016/08/25/raspberry_mianliu/index.html">
+<meta property="og:site_name" content="hack70">
+<meta property="og:description" content="根据网上教程自己全程搭建，网上教程鱼龙混杂，只有自己做过才知道对错
+思路：openvpn + squid代理 +客户端免流配置文件   从而达到免流效果
+实际上根据后期我在华硕路由器上搭建的经验来看，哪怕squid代理这一步不做，应该是照样也可以免流(无非就是不太稳定而已)
+这里要注意的是如果用了squid，对应的端口必须是80 或者8080 ，而且需要做映射。我一开始没有用8080端口，导致免">
+<meta property="og:updated_time" content="2016-09-03T07:08:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="(原创)树莓派搭建免流服务器">
+<meta name="twitter:description" content="根据网上教程自己全程搭建，网上教程鱼龙混杂，只有自己做过才知道对错
+思路：openvpn + squid代理 +客户端免流配置文件   从而达到免流效果
+实际上根据后期我在华硕路由器上搭建的经验来看，哪怕squid代理这一步不做，应该是照样也可以免流(无非就是不太稳定而已)
+这里要注意的是如果用了squid，对应的端口必须是80 或者8080 ，而且需要做映射。我一开始没有用8080端口，导致免">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hack70.com/2016/08/25/raspberry_mianliu/"/>
+
+  <title> (原创)树莓派搭建免流服务器 | hack70 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">hack70</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                (原创)树莓派搭建免流服务器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-25T16:16:25+00:00" content="2016-08-25">
+              2016-08-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><strong>根据网上教程自己全程搭建，网上教程鱼龙混杂，只有自己做过才知道对错</strong></p>
+<p><strong>思路：openvpn + squid代理 +客户端免流配置文件   从而达到免流效果</strong></p>
+<p><strong>实际上根据后期我在华硕路由器上搭建的经验来看，哪怕squid代理这一步不做，应该是照样也可以免流(无非就是不太稳定而已)</strong></p>
+<p><strong>这里要注意的是如果用了squid，对应的端口必须是80 或者8080 ，而且需要做映射。我一开始没有用8080端口，导致免流失败。</strong></p>
+<p><strong>本教程共需要映射两个端口，openvpn的1194端口和squid的8080端口</strong><br><a id="more"></a></p>
+</blockquote>
+<h2 id="1-安装Openvpn"><a href="#1-安装Openvpn" class="headerlink" title="1.安装Openvpn"></a>1.安装Openvpn</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install openvpn</div></pre></td></tr></table></figure>
+<h2 id="2-下载easy-rsa"><a href="#2-下载easy-rsa" class="headerlink" title="2.下载easy-rsa"></a>2.下载easy-rsa</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /etc/openvpn</div><div class="line">wget --no-check-certificate https://github.com/OpenVPN/easy-rsa/releases/download/2.2.2/EasyRSA-2.2.2.tgz</div><div class="line">tar -xzvf EasyRSA-2.2.2.tgz</div><div class="line">mv EasyRSA-2.2.2 easy-rsa</div></pre></td></tr></table></figure>
+<h2 id="3-配置easy-rsa"><a href="#3-配置easy-rsa" class="headerlink" title="3.配置easy-rsa"></a>3.配置easy-rsa</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /etc/openvpn/easy-rsa</div><div class="line">vim vars  #打开easy-rsa配置文件 ，这里也可以使用nano 我个人习惯vim</div></pre></td></tr></table></figure>
+<h3 id="a-编辑密钥存储路径"><a href="#a-编辑密钥存储路径" class="headerlink" title="a.编辑密钥存储路径"></a>a.编辑密钥存储路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export EASY_RSA=&quot;/etc/openvpn/easy-rsa&quot;</div></pre></td></tr></table></figure>
+<h3 id="b-编辑dh密钥大小"><a href="#b-编辑dh密钥大小" class="headerlink" title="b.编辑dh密钥大小"></a>b.编辑dh密钥大小</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export KEY_SIZE=1024  #默认的2048太大，要运算很久</div><div class="line"></div><div class="line">### c.加载配置</div></pre></td></tr></table></figure>
+<p>source ./vars</p>
+<h2 id="4-生成密钥"><a href="#4-生成密钥" class="headerlink" title="4.生成密钥"></a>4.生成密钥</h2><h3 id="a-生成ca密钥-证书密钥"><a href="#a-生成ca密钥-证书密钥" class="headerlink" title="a.生成ca密钥  证书密钥"></a>a.生成ca密钥  证书密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./clean-all   #先清空所有密钥</div><div class="line">./build-ca</div></pre></td></tr></table></figure>
+<p>所有输入都默认就可以了，直接回车;keys文件夹下多了ca.crt  ca.key</p>
+<h3 id="b-生成服务器密钥"><a href="#b-生成服务器密钥" class="headerlink" title="b.生成服务器密钥"></a>b.生成服务器密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./build-key-server server #参数为服务器名字  ，建议就叫server省得麻烦</div></pre></td></tr></table></figure>
+<p>接下来的输入中，common name 输入 server。其余默认或者打y，多出来三个文件 server.csr(证书签发请求文件) server.crt(公钥) server.key(私钥)</p>
+<h3 id="c-生成客户端密钥"><a href="#c-生成客户端密钥" class="headerlink" title="c.生成客户端密钥"></a>c.生成客户端密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./build-key-pass client1</div></pre></td></tr></table></figure>
+<p>enter pem pass phrase 输入客户端密钥的密码，输入两次。其他默认就好，又多了三个文件  client1.csr  client1.crt  client1.key<br>重复这一步可以生成用户二 client2</p>
+<h3 id="d-生成dh"><a href="#d-生成dh" class="headerlink" title="d.生成dh"></a>d.生成dh</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./build-dh</div></pre></td></tr></table></figure>
+<p>这一步要等久一点，现在又多了一个文件 dh1024.pem<br>到现在为止，使用easy-rsa生成密钥部分，就完成了。<br>回顾一下，密钥环节是 ca–服务器—客户端—dh</p>
+<h2 id="5-openvpn-服务器端配置"><a href="#5-openvpn-服务器端配置" class="headerlink" title="5.openvpn 服务器端配置"></a>5.openvpn 服务器端配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/openvpn/server.conf   #没有就自己touch一个</div></pre></td></tr></table></figure>
+<p>格式如下，粘贴以下内容：</p>
+<blockquote>
+<p>#里面都有注释，这里直接帖出修改结果吧，注释跟用不到的选项都被我删除了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">local 192.168.1.111     #树莓派的内网静态IP，这里要改成你的PI的静态内网IP</div><div class="line">port 1194   #Openvpn服务使用的端口</div><div class="line">proto tcp   #使用tcp协议传输</div><div class="line">dev tun     #使用隧道</div><div class="line"></div><div class="line">ca /etc/openvpn/easy-rsa/keys/ca.crt        #ca公钥路径</div><div class="line">cert /etc/openvpn/easy-rsa/keys/server.crt  #服务器公钥路径</div><div class="line">key /etc/openvpn/easy-rsa/keys/server.key   #服务器私钥路径</div><div class="line">dh /etc/openvpn/easy-rsa/keys/dh1024.pem    #dh</div><div class="line"></div><div class="line">server 10.8.0.0 255.255.255.0   #客户端连接后，所在的子网段</div><div class="line"></div><div class="line">ifconfig-pool-persist ipp.txt   #客户端使用固定的子网地址，这里可以不配置</div><div class="line"></div><div class="line">push &quot;redirect-gateway def1 bypass-dhcp&quot;    #网关重定向，客户端的流量都会经由OpenvpnServer</div><div class="line">push &quot;dhcp-option DNS 192.168.1.1&quot;          #配置DNS，这里配置路由器的内网地址即可</div><div class="line"></div><div class="line">duplicate-cn    #允许客户端的CommonName重复，因为我们填的都是默认值</div><div class="line"></div><div class="line">keepalive 10 120</div><div class="line"></div><div class="line">comp-lzo    #启动数据压缩</div><div class="line"></div><div class="line">user nobody     #Openvpn进程运行时所属的用户，这里为了安全</div><div class="line">group nogroup   #Openvpn进程运行时所属的组，这里为了安全</div><div class="line"></div><div class="line">persist-key     #一直保存key，避免权限问题导致不能再次读取</div><div class="line">persist-tun     #一直保持隧道，原因同上</div><div class="line"></div><div class="line">status openvpn-status.log   #Openvpn运行状态Log，就在Openvpn目录下，会自动生成</div><div class="line">log openvpn.log             #Openvpn运行Log，也在Openvpn目录下，会自动生成</div><div class="line"></div><div class="line">verb 3                      #log的等级</div></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service openvpn restart  #重新启动openvpn</div></pre></td></tr></table></figure>
+<h2 id="6-安装配置squid，对应端口必须80或者8080-，不然不免流"><a href="#6-安装配置squid，对应端口必须80或者8080-，不然不免流" class="headerlink" title="6.安装配置squid，对应端口必须80或者8080 ，不然不免流"></a>6.安装配置squid，对应端口必须80或者8080 ，不然不免流</h2><h3 id="安装squid3"><a href="#安装squid3" class="headerlink" title="安装squid3"></a>安装squid3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install squid3</div><div class="line">cd /etc/squid3</div><div class="line">sudo  mv squid.conf squid.conf.bak</div><div class="line">sudo vim squid.conf</div></pre></td></tr></table></figure>
+<p>squid.conf 内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">auth_param basic program /usr/lib/squid3/basic_ncsa_auth /etc/squid3/auth_user</div><div class="line">auth_param basic children 5</div><div class="line">auth_param basic realm Squid proxy-caching web server</div><div class="line">#acl localhost src 127.0.0.1/32</div><div class="line">acl SSL_ports port 443</div><div class="line">acl Safe_ports port 80      # http</div><div class="line">acl Safe_ports port 21      # ftp</div><div class="line">acl Safe_ports port 443    # https</div><div class="line">acl Safe_ports port 70      # gopher</div><div class="line">acl Safe_ports port 210    # wais</div><div class="line">acl Safe_ports port 1025-65535  # unregistered ports</div><div class="line">acl Safe_ports port 280    # http-mgmt</div><div class="line">acl Safe_ports port 488    # gss-http</div><div class="line">acl Safe_ports port 591    # filemaker</div><div class="line">acl Safe_ports port 777    # multiling http</div><div class="line">acl CONNECT method CONNECT</div><div class="line">acl auth_user proxy_auth REQUIRED </div><div class="line"></div><div class="line">via off</div><div class="line">request_header_access X-Forwarded-For deny all</div><div class="line">request_header_access user-agent  deny all</div><div class="line">reply_header_access X-Forwarded-For deny all</div><div class="line">reply_header_access user-agent  deny all</div><div class="line"></div><div class="line">http_access allow auth_user</div><div class="line">http_access deny all</div><div class="line"></div><div class="line">http_port 80 #端口可自定义，这里我用的是8080</div></pre></td></tr></table></figure></p>
+<h3 id="安装apache2-utils用来生成squid的认证文件"><a href="#安装apache2-utils用来生成squid的认证文件" class="headerlink" title="安装apache2-utils用来生成squid的认证文件"></a>安装apache2-utils用来生成squid的认证文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install apache2-utils</div><div class="line">sudo htpasswd -c /etc/squid3/auth_user #自己设定一个用户名</div></pre></td></tr></table></figure>
+<p>回车后输入两次密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo squid3 -z</div><div class="line">sudo squid3 -s</div></pre></td></tr></table></figure></p>
+<p>重启raspberry<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo reboot</div></pre></td></tr></table></figure></p>
+<h2 id="7-防火墙添加规则-（根据网上教程做的，不知道是否为必须）"><a href="#7-防火墙添加规则-（根据网上教程做的，不知道是否为必须）" class="headerlink" title="7.防火墙添加规则  （根据网上教程做的，不知道是否为必须）"></a>7.防火墙添加规则  （根据网上教程做的，不知道是否为必须）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /etc/openvpn</div><div class="line">nano firewall-openvpn.sh</div></pre></td></tr></table></figure>
+<blockquote>
+<p>#添加以下内容并保存</p>
+<p>#!/bin/sh</p>
+<p>#允许接收目的端口为1194的包；1194就是server.conf中配置的端口<br>iptables -A INPUT -p udp –dport 1194 -j ACCEPT</p>
+<p>#源地址转换：将vpn子网的ip替换为pi的本地ip<br>iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j SNAT –to-source 192.168.1.111</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">chmod 700 firewall-openvpn.sh #编辑完后，更改脚本的读写权限，为了安全</div><div class="line"></div><div class="line">nano /etc/network/interfaces  #设置自动启动,新添加的为最后一行，注意Tab对齐</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">    address 192.168.1.111</div><div class="line">    netmask 255.255.255.0</div><div class="line">    gateway 192.168.1.1</div><div class="line">    pre-up /etc/openvpn/firewall-openvpn.sh</div></pre></td></tr></table></figure>
+<h2 id="8-openvpn客户端配置"><a href="#8-openvpn客户端配置" class="headerlink" title="8.openvpn客户端配置"></a>8.openvpn客户端配置</h2><p>给出我的免流客户端配置文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">client</div><div class="line">dev tun</div><div class="line">keepalive 10 120</div><div class="line">proto tcp</div><div class="line">remote 你的外网ip 1194 tcp-client</div><div class="line">resolv-retry infinite</div><div class="line">nobind</div><div class="line">persist-key</div><div class="line">persist-tun</div><div class="line">mute-replay-warnings</div><div class="line">ns-cert-type server</div><div class="line">comp-lzo</div><div class="line">verb 3</div><div class="line">mute 20</div><div class="line"></div><div class="line">########免流代码########</div><div class="line">http-proxy-option EXT1 &quot;POST http://rd.go.10086.cn&quot; </div><div class="line">http-proxy-option EXT1 &quot;GET http://rd.go.10086.cn&quot; </div><div class="line">http-proxy-option EXT1 &quot;X-Online-Host: rd.go.10086.cn&quot; </div><div class="line">http-proxy-option EXT1 &quot;POST http://rd.go.10086.cn&quot; </div><div class="line">http-proxy-option EXT1 &quot;X-Online-Host: rd.go.10086.cn&quot; </div><div class="line">http-proxy-option EXT1 &quot;POST http://rd.go.10086.cn&quot; </div><div class="line">http-proxy-option EXT1 &quot;Host: rd.go.10086.cn&quot; </div><div class="line">http-proxy-option EXT1 &quot;GET http://rd.go.10086.cn&quot; </div><div class="line">http-proxy-option EXT1 &quot;Host: rd.go.10086.cn&quot;</div><div class="line">http-proxy 你的外网ip 8080  #端口和上面的squid一致</div><div class="line"></div><div class="line">push route 114.114.114.114 114.114.115.115</div><div class="line"></div><div class="line">&lt;http-proxy-user-pass&gt;</div><div class="line">squid帐号</div><div class="line">squid密码</div><div class="line">&lt;/http-proxy-user-pass&gt;</div><div class="line">&lt;ca&gt;</div><div class="line">ca.crt内容复制进来  。这三个文件都是上面生成加密密钥步骤时候产生的</div><div class="line">&lt;/ca&gt;</div><div class="line">&lt;cert&gt;</div><div class="line">client1.crt复制进来</div><div class="line">&lt;/cert&gt;</div><div class="line">&lt;key&gt;</div><div class="line">client1.key复制进来</div><div class="line">&lt;/key&gt;</div></pre></td></tr></table></figure>
+<p>这里总共需要映射两个端口，一个是openvpn的1194,一个是squid的8080<br>把客户端配置文件保存为  client.ovpn 然后传给手机，在手机的openvpn客户端上加载。然后用产生client密钥时设置的密码登录就可以了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/免流/" rel="tag">#免流</a>
+          
+            <a href="/tags/raspberry/" rel="tag">#raspberry</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/21/kali-hexo-github/" rel="next" title="Hexo建站（kali+hexo+github）">
+                <i class="fa fa-chevron-left"></i> Hexo建站（kali+hexo+github）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/27/ac68u_mianliu/" rel="prev" title="(原创)华硕ac68u搭建免流加饭强服务器">
+                (原创)华硕ac68u搭建免流加饭强服务器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="hack70" />
+          <p class="site-author-name" itemprop="name">hack70</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装Openvpn"><span class="nav-number">1.</span> <span class="nav-text">1.安装Openvpn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-下载easy-rsa"><span class="nav-number">2.</span> <span class="nav-text">2.下载easy-rsa</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-配置easy-rsa"><span class="nav-number">3.</span> <span class="nav-text">3.配置easy-rsa</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-编辑密钥存储路径"><span class="nav-number">3.1.</span> <span class="nav-text">a.编辑密钥存储路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-编辑dh密钥大小"><span class="nav-number">3.2.</span> <span class="nav-text">b.编辑dh密钥大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-生成密钥"><span class="nav-number">4.</span> <span class="nav-text">4.生成密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-生成ca密钥-证书密钥"><span class="nav-number">4.1.</span> <span class="nav-text">a.生成ca密钥  证书密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-生成服务器密钥"><span class="nav-number">4.2.</span> <span class="nav-text">b.生成服务器密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c-生成客户端密钥"><span class="nav-number">4.3.</span> <span class="nav-text">c.生成客户端密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d-生成dh"><span class="nav-number">4.4.</span> <span class="nav-text">d.生成dh</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-openvpn-服务器端配置"><span class="nav-number">5.</span> <span class="nav-text">5.openvpn 服务器端配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-安装配置squid，对应端口必须80或者8080-，不然不免流"><span class="nav-number">6.</span> <span class="nav-text">6.安装配置squid，对应端口必须80或者8080 ，不然不免流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装squid3"><span class="nav-number">6.1.</span> <span class="nav-text">安装squid3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装apache2-utils用来生成squid的认证文件"><span class="nav-number">6.2.</span> <span class="nav-text">安装apache2-utils用来生成squid的认证文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-防火墙添加规则-（根据网上教程做的，不知道是否为必须）"><span class="nav-number">7.</span> <span class="nav-text">7.防火墙添加规则  （根据网上教程做的，不知道是否为必须）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-openvpn客户端配置"><span class="nav-number">8.</span> <span class="nav-text">8.openvpn客户端配置</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hack70</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

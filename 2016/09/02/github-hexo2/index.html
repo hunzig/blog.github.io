@@ -1,0 +1,665 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo,blog," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Github + Hexo 搭建博客拓展知识
+##一、前言相关知识要点：
+
+Git
+Github
+GitHub Pages
+Hexo
+Makedown
+
+##二、必要配置
+###2.1 GitHub Pages仓库两种类型：User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问Projec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github+hexo拓展知识">
+<meta property="og:url" content="http://hack70.com/2016/09/02/github-hexo2/index.html">
+<meta property="og:site_name" content="hack70">
+<meta property="og:description" content="Github + Hexo 搭建博客拓展知识
+##一、前言相关知识要点：
+
+Git
+Github
+GitHub Pages
+Hexo
+Makedown
+
+##二、必要配置
+###2.1 GitHub Pages仓库两种类型：User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问Projec">
+<meta property="og:updated_time" content="2016-09-02T08:45:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="github+hexo拓展知识">
+<meta name="twitter:description" content="Github + Hexo 搭建博客拓展知识
+##一、前言相关知识要点：
+
+Git
+Github
+GitHub Pages
+Hexo
+Makedown
+
+##二、必要配置
+###2.1 GitHub Pages仓库两种类型：User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问Projec">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hack70.com/2016/09/02/github-hexo2/"/>
+
+  <title> github+hexo拓展知识 | hack70 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">hack70</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                github+hexo拓展知识
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T08:22:24+00:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Github + Hexo 搭建博客拓展知识</p>
+<p>##一、前言<br>相关知识要点：</p>
+<ul>
+<li><a href="http://git-scm.com/book/zh/v2" target="_blank" rel="external">Git</a></li>
+<li><a href="https://github.com/" target="_blank" rel="external">Github</a></li>
+<li><a href="https://pages.github.com/" target="_blank" rel="external">GitHub Pages</a></li>
+<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a></li>
+<li><a href="http://www.appinn.com/markdown/#autoescape" target="_blank" rel="external">Makedown</a></li>
+</ul>
+<p>##二、必要配置</p>
+<p>###2.1 GitHub Pages仓库<br>两种类型：<br>User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问<br>Project Pages：展示项目、没有特定命名规则、使用gh-pages分支，通过username.github.io/projectname访问</p>
+<p>###2.2 Git<br>2.2.1 安装Git<br>1.<a href="http://git-scm.com/download/win" target="_blank" rel="external">Git官方版本的安装</a><br>2.<a href="https://desktop.github.com/" target="_blank" rel="external">GitHub for Windows</a><br>2.2.2 配置Git<br>安装完Git的第一件事情就是设置用户名称和邮件地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name&quot;username&quot;</div><div class="line">$ git config --global user.email &quot;username@example.com&quot;</div></pre></td></tr></table></figure></p>
+<p>如果想隐藏自己邮件地址，可以在Github设置里选择Keeping your email address private<br>同时可以用以下格式配置你的邮件地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.email &quot;username@users.noreply.github.com&quot;</div></pre></td></tr></table></figure></p>
+<p>2.2.3相关资料</p>
+<ul>
+<li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external">安装Git</a></li>
+<li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE" target="_blank" rel="external">配置Git</a></li>
+<li><a href="https://help.github.com/articles/setting-your-email-in-git/" target="_blank" rel="external">Setting your email in Git</a></li>
+<li><a href="https://help.github.com/articles/keeping-your-email-address-private/" target="_blank" rel="external">Keeping your email address private</a><br>###2.3Git 与 GitHub<br>2.3.1区别<br>git是一个版本控制工具，而github类似远程仓库，用于存放用git管理的各种项目。<br>2.3.2与github建立联系<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls -al ~/.ssh   #检查电脑是否已经有ssh keys</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果已经有id_ras.pub和id_rsa，则证明已存在SSH keys。如果没有，则要生成新的ssh keys：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@excample.com&quot;  #创建一个新ssh key，以邮件地址为标签</div></pre></td></tr></table></figure></p>
+<p>一路回车即可。接下去向ssh-agent添加key:<br>首先确保ssh-agent可运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-agent -s   #start the ssh-agent in the background</div><div class="line">$ ssh-add ~/.ssh/id_rsa   #添加ssh key</div><div class="line">在github添加sshkey：</div><div class="line">把 ~/.ssh/id_rsa.pub内容粘帖到github--personal settings--ssh keys里</div><div class="line">最后测试链接：</div></pre></td></tr></table></figure></p>
+<p>ssh -T git@github.com #attempts to ssh to github<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">如果看到提示yes/no ，则键如yes，添加成功。</div><div class="line">相关资料：</div><div class="line">- [Generating SSH keys](https://help.github.com/articles/generating-ssh-keys/)</div><div class="line"></div><div class="line">#2.4 Hexo</div><div class="line">检查电脑是否安装了  node.js 和 git，如果已经安装：</div></pre></td></tr></table></figure></p>
+<p>npm install -g hexo-cli<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">安装完成后进入blog 目录</div></pre></td></tr></table></figure></p>
+<p>$ hexo init<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">安装依赖包</div></pre></td></tr></table></figure></p>
+<p>$ npm install<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">至此，本地hexo博客已经建成</div></pre></td></tr></table></figure></p>
+<p>$ hexo g<br>$ hexo d<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">localhost:4000就可以看到博客了。</div><div class="line"></div><div class="line">##部署到github</div><div class="line">在theme下的_config.yml修改成</div></pre></td></tr></table></figure></p>
+<p>deploy:<br>type:git<br>repo:对应仓库的ssh地址（比如git@github.com:username/username.github.io.git）<br>branch:分支（user pages为master,project pages为gh-pages）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">另外还需要安装一个插件：</div></pre></td></tr></table></figure></p>
+<p>npm install hexo-deployer-git –save<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">然后再执行：</div></pre></td></tr></table></figure></p>
+<p>hexo g<br>hexo d<br>```<br> 接下来，就可以用username.github.io访问你的博客了<br>其他主题：<br>可以用git clone 将别人的主题拷贝到hexo\themes下，然后将_config.yml中的theme:landscape改为对应的主题名字。</p>
+<p>##优化部署和管理</p>
+<p>###4.2 我的博客搭建流程<br>创建仓库，CrazyMilk.github.io；</p>
+<p>创建两个分支：master 与 hexo；</p>
+<p>设置hexo为默认分支（因为我们只需要手动管理这个分支上的Hexo网站文件）；</p>
+<p>使用git clone git@github.com:CrazyMilk/CrazyMilk.github.io.git拷贝仓库；</p>
+<p>在本地CrazyMilk.github.io文件夹下通过Git bash依次执行npm install hexo、hexo init、npm install 和 npm install hexo-deployer-git（此时当前分支应显示为hexo）;</p>
+<p>修改_config.yml中的deploy参数，分支应为master；</p>
+<p>依次执行git add .、git commit -m “…”、git push origin hexo提交网站相关的文件；</p>
+<p>执行hexo generate -d生成网站并部署到GitHub上。</p>
+<p>这样一来，在GitHub上的CrazyMilk.github.io仓库就有两个分支，一个hexo分支用来存放网站的原始文件，一个master分支用来存放生成的静态网页。完美( •̀ ω •́ )y！</p>
+<p>###4.3 我的博客管理流程<br>4.3.1 日常修改<br>在本地对博客进行修改（添加新博文、修改样式等等）后，通过下面的流程进行管理：</p>
+<p>依次执行git add .、git commit -m “…”、git push origin hexo指令将改动推送到GitHub（此时当前分支应为hexo）；</p>
+<p>然后才执行hexo generate -d发布网站到master分支上。</p>
+<p>虽然两个过程顺序调转一般不会有问题，不过逻辑上这样的顺序是绝对没问题的（例如突然死机要重装了，悲催….的情况，调转顺序就有问题了）。</p>
+<p>4.3.2 本地资料丢失</p>
+<p>当重装电脑之后，或者想在其他电脑上修改博客，可以使用下列步骤：</p>
+<p>使用git clone git@github.com:CrazyMilk/CrazyMilk.github.io.git拷贝仓库（默认分支为hexo）；</p>
+<p>在本地新拷贝的CrazyMilk.github.io文件夹下通过Git bash依次执行下列指令：npm install hexo、npm install、npm install hexo-deployer-git（记得，不需要hexo init这条指令）。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+            <a href="/tags/blog/" rel="tag">#blog</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/28/meilin_crontab/" rel="next" title="梅林固件定时重启脚本设置">
+                <i class="fa fa-chevron-left"></i> 梅林固件定时重启脚本设置
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/02/raspberry-config/" rel="prev" title="树莓派安装好后的一些设置">
+                树莓派安装好后的一些设置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="hack70" />
+          <p class="site-author-name" itemprop="name">hack70</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hack70</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
