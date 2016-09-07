@@ -85,24 +85,18 @@
 
 
 <meta name="description" content="VPS 部署心得
-现在如果手里有一台 VPS, 我做的第一件事一定是安装 docker,至于原因么, 有很多, 最重要的一点是它真的很方便.
-Docker 安装1curl -fsSL https://get.docker.com/ | sh
-Mongo 安装写 mongo 的配置文件.(我的习惯, 在 Home 目录下创建文件夹名为 Mongo 并 进入)123456vim mongodb.con">
+现在如果手里有一台 VPS, 我做的第一件事一定是安装 docker,至于原因么, 有很多, 最重要的一点是它真的很方便.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vps中docker的应用">
 <meta property="og:url" content="http://hack70.com/2016/09/02/vps-docker/index.html">
 <meta property="og:site_name" content="hack70">
 <meta property="og:description" content="VPS 部署心得
-现在如果手里有一台 VPS, 我做的第一件事一定是安装 docker,至于原因么, 有很多, 最重要的一点是它真的很方便.
-Docker 安装1curl -fsSL https://get.docker.com/ | sh
-Mongo 安装写 mongo 的配置文件.(我的习惯, 在 Home 目录下创建文件夹名为 Mongo 并 进入)123456vim mongodb.con">
-<meta property="og:updated_time" content="2016-09-03T07:13:57.000Z">
+现在如果手里有一台 VPS, 我做的第一件事一定是安装 docker,至于原因么, 有很多, 最重要的一点是它真的很方便.">
+<meta property="og:updated_time" content="2016-09-07T04:21:21.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vps中docker的应用">
 <meta name="twitter:description" content="VPS 部署心得
-现在如果手里有一台 VPS, 我做的第一件事一定是安装 docker,至于原因么, 有很多, 最重要的一点是它真的很方便.
-Docker 安装1curl -fsSL https://get.docker.com/ | sh
-Mongo 安装写 mongo 的配置文件.(我的习惯, 在 Home 目录下创建文件夹名为 Mongo 并 进入)123456vim mongodb.con">
+现在如果手里有一台 VPS, 我做的第一件事一定是安装 docker,至于原因么, 有很多, 最重要的一点是它真的很方便.">
 
 
 
@@ -306,6 +300,7 @@ Mongo 安装写 mongo 的配置文件.(我的习惯, 在 Home 目录下创建文
       
         <p>VPS 部署心得</p>
 <p>现在如果手里有一台 VPS, 我做的第一件事一定是安装 docker,至于原因么, 有很多, 最重要的一点是它真的很方便.</p>
+<a id="more"></a>
 <h3 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -fsSL https://get.docker.com/ | sh</div></pre></td></tr></table></figure>
 <h3 id="Mongo-安装"><a href="#Mongo-安装" class="headerlink" title="Mongo 安装"></a>Mongo 安装</h3><p>写 mongo 的配置文件.(我的习惯, 在 Home 目录下创建文件夹名为 Mongo 并 进入)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vim mongodb.conf</div><div class="line">#   文件内容如下:</div><div class="line">net:</div><div class="line">   bindIp:</div><div class="line">      - 127.0.0.1</div><div class="line">   port: 27017</div></pre></td></tr></table></figure></p>
 <p>运行 mongo 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker run --name mongo-server -d \</div><div class="line">--restart=always \</div><div class="line">-p 27017:27017 \</div><div class="line">-v $(pwd)/data:/data/db \</div><div class="line">-v $(pwd)/mongodb.conf:/etc/mongodb.conf \</div><div class="line">mongo3.2 --config /etc/mongodb.conf</div></pre></td></tr></table></figure></p>

@@ -85,45 +85,36 @@
 
 
 <meta name="description" content="Github + Hexo 搭建博客拓展知识
-##一、前言相关知识要点：
+一、前言相关知识要点：
 
 Git
 Github
 GitHub Pages
 Hexo
-Makedown
-
-##二、必要配置
-###2.1 GitHub Pages仓库两种类型：User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问Projec">
+Makedown">
 <meta property="og:type" content="article">
 <meta property="og:title" content="github+hexo拓展知识">
 <meta property="og:url" content="http://hack70.com/2016/09/02/github-hexo2/index.html">
 <meta property="og:site_name" content="hack70">
 <meta property="og:description" content="Github + Hexo 搭建博客拓展知识
-##一、前言相关知识要点：
+一、前言相关知识要点：
 
 Git
 Github
 GitHub Pages
 Hexo
-Makedown
-
-##二、必要配置
-###2.1 GitHub Pages仓库两种类型：User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问Projec">
-<meta property="og:updated_time" content="2016-09-02T08:45:02.000Z">
+Makedown">
+<meta property="og:updated_time" content="2016-09-07T04:19:16.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="github+hexo拓展知识">
 <meta name="twitter:description" content="Github + Hexo 搭建博客拓展知识
-##一、前言相关知识要点：
+一、前言相关知识要点：
 
 Git
 Github
 GitHub Pages
 Hexo
-Makedown
-
-##二、必要配置
-###2.1 GitHub Pages仓库两种类型：User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问Projec">
+Makedown">
 
 
 
@@ -326,7 +317,7 @@ Makedown
 
       
         <p>Github + Hexo 搭建博客拓展知识</p>
-<p>##一、前言<br>相关知识要点：</p>
+<h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>相关知识要点：</p>
 <ul>
 <li><a href="http://git-scm.com/book/zh/v2" target="_blank" rel="external">Git</a></li>
 <li><a href="https://github.com/" target="_blank" rel="external">Github</a></li>
@@ -334,30 +325,29 @@ Makedown
 <li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a></li>
 <li><a href="http://www.appinn.com/markdown/#autoescape" target="_blank" rel="external">Makedown</a></li>
 </ul>
-<p>##二、必要配置</p>
-<p>###2.1 GitHub Pages仓库<br>两种类型：<br>User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问<br>Project Pages：展示项目、没有特定命名规则、使用gh-pages分支，通过username.github.io/projectname访问</p>
-<p>###2.2 Git<br>2.2.1 安装Git<br>1.<a href="http://git-scm.com/download/win" target="_blank" rel="external">Git官方版本的安装</a><br>2.<a href="https://desktop.github.com/" target="_blank" rel="external">GitHub for Windows</a><br>2.2.2 配置Git<br>安装完Git的第一件事情就是设置用户名称和邮件地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name&quot;username&quot;</div><div class="line">$ git config --global user.email &quot;username@example.com&quot;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="二、必要配置"><a href="#二、必要配置" class="headerlink" title="二、必要配置"></a>二、必要配置</h2><h3 id="2-1-GitHub-Pages仓库"><a href="#2-1-GitHub-Pages仓库" class="headerlink" title="2.1 GitHub Pages仓库"></a>2.1 GitHub Pages仓库</h3><p>两种类型：<br>User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问<br>Project Pages：展示项目、没有特定命名规则、使用gh-pages分支，通过username.github.io/projectname访问</p>
+<h3 id="2-2-Git"><a href="#2-2-Git" class="headerlink" title="2.2 Git"></a>2.2 Git</h3><p>2.2.1 安装Git<br>1.<a href="http://git-scm.com/download/win" target="_blank" rel="external">Git官方版本的安装</a><br>2.<a href="https://desktop.github.com/" target="_blank" rel="external">GitHub for Windows</a><br>2.2.2 配置Git<br>安装完Git的第一件事情就是设置用户名称和邮件地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name&quot;username&quot;</div><div class="line">$ git config --global user.email &quot;username@example.com&quot;</div></pre></td></tr></table></figure></p>
 <p>如果想隐藏自己邮件地址，可以在Github设置里选择Keeping your email address private<br>同时可以用以下格式配置你的邮件地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.email &quot;username@users.noreply.github.com&quot;</div></pre></td></tr></table></figure></p>
 <p>2.2.3相关资料</p>
 <ul>
 <li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external">安装Git</a></li>
 <li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE" target="_blank" rel="external">配置Git</a></li>
 <li><a href="https://help.github.com/articles/setting-your-email-in-git/" target="_blank" rel="external">Setting your email in Git</a></li>
-<li><a href="https://help.github.com/articles/keeping-your-email-address-private/" target="_blank" rel="external">Keeping your email address private</a><br>###2.3Git 与 GitHub<br>2.3.1区别<br>git是一个版本控制工具，而github类似远程仓库，用于存放用git管理的各种项目。<br>2.3.2与github建立联系<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls -al ~/.ssh   #检查电脑是否已经有ssh keys</div></pre></td></tr></table></figure>
+<li><a href="https://help.github.com/articles/keeping-your-email-address-private/" target="_blank" rel="external">Keeping your email address private</a><h3 id="2-3Git-与-GitHub"><a href="#2-3Git-与-GitHub" class="headerlink" title="2.3Git 与 GitHub"></a>2.3Git 与 GitHub</h3>2.3.1区别<br>git是一个版本控制工具，而github类似远程仓库，用于存放用git管理的各种项目。<br>2.3.2与github建立联系<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls -al ~/.ssh   #检查电脑是否已经有ssh keys</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>如果已经有id_ras.pub和id_rsa，则证明已存在SSH keys。如果没有，则要生成新的ssh keys：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@excample.com&quot;  #创建一个新ssh key，以邮件地址为标签</div></pre></td></tr></table></figure></p>
 <p>一路回车即可。接下去向ssh-agent添加key:<br>首先确保ssh-agent可运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-agent -s   #start the ssh-agent in the background</div><div class="line">$ ssh-add ~/.ssh/id_rsa   #添加ssh key</div><div class="line">在github添加sshkey：</div><div class="line">把 ~/.ssh/id_rsa.pub内容粘帖到github--personal settings--ssh keys里</div><div class="line">最后测试链接：</div></pre></td></tr></table></figure></p>
-<p>ssh -T git@github.com #attempts to ssh to github<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">如果看到提示yes/no ，则键如yes，添加成功。</div><div class="line">相关资料：</div><div class="line">- [Generating SSH keys](https://help.github.com/articles/generating-ssh-keys/)</div><div class="line"></div><div class="line">#2.4 Hexo</div><div class="line">检查电脑是否安装了  node.js 和 git，如果已经安装：</div></pre></td></tr></table></figure></p>
+<p>ssh -T git@github.com #attempts to ssh to github<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">如果看到提示yes/no ，则键如yes，添加成功。</div><div class="line">相关资料：</div><div class="line">- [Generating SSH keys](https://help.github.com/articles/generating-ssh-keys/)</div><div class="line"></div><div class="line">### 2.4 Hexo</div><div class="line">检查电脑是否安装了  node.js 和 git，如果已经安装：</div></pre></td></tr></table></figure></p>
 <p>npm install -g hexo-cli<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">安装完成后进入blog 目录</div></pre></td></tr></table></figure></p>
 <p>$ hexo init<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">安装依赖包</div></pre></td></tr></table></figure></p>
 <p>$ npm install<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">至此，本地hexo博客已经建成</div></pre></td></tr></table></figure></p>
-<p>$ hexo g<br>$ hexo d<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">localhost:4000就可以看到博客了。</div><div class="line"></div><div class="line">##部署到github</div><div class="line">在theme下的_config.yml修改成</div></pre></td></tr></table></figure></p>
+<p>$ hexo g<br>$ hexo d<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">localhost:4000就可以看到博客了。</div><div class="line"></div><div class="line">## 部署到github</div><div class="line">在theme下的_config.yml修改成</div></pre></td></tr></table></figure></p>
 <p>deploy:<br>type:git<br>repo:对应仓库的ssh地址（比如git@github.com:username/username.github.io.git）<br>branch:分支（user pages为master,project pages为gh-pages）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">另外还需要安装一个插件：</div></pre></td></tr></table></figure></p>
 <p>npm install hexo-deployer-git –save<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">然后再执行：</div></pre></td></tr></table></figure></p>
 <p>hexo g<br>hexo d<br>```<br> 接下来，就可以用username.github.io访问你的博客了<br>其他主题：<br>可以用git clone 将别人的主题拷贝到hexo\themes下，然后将_config.yml中的theme:landscape改为对应的主题名字。</p>
-<p>##优化部署和管理</p>
-<p>###4.2 我的博客搭建流程<br>创建仓库，CrazyMilk.github.io；</p>
+<h2 id="优化部署和管理"><a href="#优化部署和管理" class="headerlink" title="优化部署和管理"></a>优化部署和管理</h2><h3 id="4-2-我的博客搭建流程"><a href="#4-2-我的博客搭建流程" class="headerlink" title="4.2 我的博客搭建流程"></a>4.2 我的博客搭建流程</h3><p>创建仓库，CrazyMilk.github.io；</p>
 <p>创建两个分支：master 与 hexo；</p>
 <p>设置hexo为默认分支（因为我们只需要手动管理这个分支上的Hexo网站文件）；</p>
 <p>使用git clone git@github.com:CrazyMilk/CrazyMilk.github.io.git拷贝仓库；</p>
@@ -366,7 +356,7 @@ Makedown
 <p>依次执行git add .、git commit -m “…”、git push origin hexo提交网站相关的文件；</p>
 <p>执行hexo generate -d生成网站并部署到GitHub上。</p>
 <p>这样一来，在GitHub上的CrazyMilk.github.io仓库就有两个分支，一个hexo分支用来存放网站的原始文件，一个master分支用来存放生成的静态网页。完美( •̀ ω •́ )y！</p>
-<p>###4.3 我的博客管理流程<br>4.3.1 日常修改<br>在本地对博客进行修改（添加新博文、修改样式等等）后，通过下面的流程进行管理：</p>
+<h3 id="4-3-我的博客管理流程"><a href="#4-3-我的博客管理流程" class="headerlink" title="4.3 我的博客管理流程"></a>4.3 我的博客管理流程</h3><p>4.3.1 日常修改<br>在本地对博客进行修改（添加新博文、修改样式等等）后，通过下面的流程进行管理：</p>
 <p>依次执行git add .、git commit -m “…”、git push origin hexo指令将改动推送到GitHub（此时当前分支应为hexo）；</p>
 <p>然后才执行hexo generate -d发布网站到master分支上。</p>
 <p>虽然两个过程顺序调转一般不会有问题，不过逻辑上这样的顺序是绝对没问题的（例如突然死机要重装了，悲催….的情况，调转顺序就有问题了）。</p>
@@ -531,7 +521,7 @@ Makedown
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、必要配置"><span class="nav-number">2.</span> <span class="nav-text">二、必要配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-GitHub-Pages仓库"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 GitHub Pages仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Git"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3Git-与-GitHub"><span class="nav-number">2.3.</span> <span class="nav-text">2.3Git 与 GitHub</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化部署和管理"><span class="nav-number">3.</span> <span class="nav-text">优化部署和管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-我的博客搭建流程"><span class="nav-number">3.1.</span> <span class="nav-text">4.2 我的博客搭建流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-我的博客管理流程"><span class="nav-number">3.2.</span> <span class="nav-text">4.3 我的博客管理流程</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

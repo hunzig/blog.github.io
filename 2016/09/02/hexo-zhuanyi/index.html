@@ -86,26 +86,20 @@
 
 <meta name="description" content="hexo是一个挺好的博客程序，但是就是更新的时候必须在部署好的机器上发布，换了一台电脑的话就要重新部署环境，比较麻烦。
 思路：在raspberry上复制台式机hexo环境，如果不在办公室，可以在任何一台电脑ssh到respberry上写博客。
-环境：一台已经搭建过hexo的raspberry
-
-拷贝台式机的blog目录到raspberry因为blog目录下文件是在太多了，所以在本地zip压缩好后">
+环境：一台已经搭建过hexo的raspberry">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo转移到其他电脑">
 <meta property="og:url" content="http://hack70.com/2016/09/02/hexo-zhuanyi/index.html">
 <meta property="og:site_name" content="hack70">
 <meta property="og:description" content="hexo是一个挺好的博客程序，但是就是更新的时候必须在部署好的机器上发布，换了一台电脑的话就要重新部署环境，比较麻烦。
 思路：在raspberry上复制台式机hexo环境，如果不在办公室，可以在任何一台电脑ssh到respberry上写博客。
-环境：一台已经搭建过hexo的raspberry
-
-拷贝台式机的blog目录到raspberry因为blog目录下文件是在太多了，所以在本地zip压缩好后">
-<meta property="og:updated_time" content="2016-09-04T08:29:01.000Z">
+环境：一台已经搭建过hexo的raspberry">
+<meta property="og:updated_time" content="2016-09-07T04:19:45.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo转移到其他电脑">
 <meta name="twitter:description" content="hexo是一个挺好的博客程序，但是就是更新的时候必须在部署好的机器上发布，换了一台电脑的话就要重新部署环境，比较麻烦。
 思路：在raspberry上复制台式机hexo环境，如果不在办公室，可以在任何一台电脑ssh到respberry上写博客。
-环境：一台已经搭建过hexo的raspberry
-
-拷贝台式机的blog目录到raspberry因为blog目录下文件是在太多了，所以在本地zip压缩好后">
+环境：一台已经搭建过hexo的raspberry">
 
 
 
@@ -312,6 +306,7 @@
 <p><strong>思路：在raspberry上复制台式机hexo环境，如果不在办公室，可以在任何一台电脑ssh到respberry上写博客。</strong></p>
 <p><strong>环境：一台已经搭建过hexo的raspberry</strong></p>
 </blockquote>
+<a id="more"></a>
 <h3 id="拷贝台式机的blog目录到raspberry"><a href="#拷贝台式机的blog目录到raspberry" class="headerlink" title="拷贝台式机的blog目录到raspberry"></a>拷贝台式机的blog目录到raspberry</h3><p>因为blog目录下文件是在太多了，所以在本地zip压缩好后利用btsync同步到raspberry /var/www/html/目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip blog.zip</div></pre></td></tr></table></figure></p>
 <h3 id="复制本机私钥到raspberry"><a href="#复制本机私钥到raspberry" class="headerlink" title="复制本机私钥到raspberry"></a>复制本机私钥到raspberry</h3><p>把本机is_rsa文件放入 /root/.ssh/下</p>
 <h3 id="建立所需配置文件"><a href="#建立所需配置文件" class="headerlink" title="建立所需配置文件"></a>建立所需配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd blog</div><div class="line">npm install</div></pre></td></tr></table></figure>

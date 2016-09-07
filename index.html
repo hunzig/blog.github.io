@@ -297,26 +297,13 @@
 
       
         
-          
-            <p>作者：Zerone安全团队杨哲</p>
+          <p>作者：Zerone安全团队杨哲</p>
 <p>4.3g WPA PMK Hash Table DVD光盘镜像可到anywlan论坛或者作者blog查看下载地址</p>
-<h2 id="一、GPU运算基础知识"><a href="#一、GPU运算基础知识" class="headerlink" title="一、GPU运算基础知识"></a>一、GPU运算基础知识</h2><p>略</p>
-<h2 id="二、GPU运算破解所用软件EWSA介绍"><a href="#二、GPU运算破解所用软件EWSA介绍" class="headerlink" title="二、GPU运算破解所用软件EWSA介绍"></a>二、GPU运算破解所用软件EWSA介绍</h2><p>Elcomsoft Wireless Security Auditor<br>软件下载：<a href="http://www.elcomsoft.com/ewsa.html" target="_blank" rel="external">http://www.elcomsoft.com/ewsa.html</a><br>支持显卡列表：</p>
-<ul>
-<li>NVDIA显卡  geforce 8,9,200 series及其更高版本 至少256mb显存</li>
-<li>ATI显卡   radeon hd 3000 series、 4600 series、4800series 及其更高版本<br>网上下载破解版要注意属性里数字签名是否有，没的可能是绑定木马</li>
-</ul>
-<h2 id="三、GPU破解无线利器—EWSA的安装"><a href="#三、GPU破解无线利器—EWSA的安装" class="headerlink" title="三、GPU破解无线利器—EWSA的安装"></a>三、GPU破解无线利器—EWSA的安装</h2><h2 id="四、使用EWSA进行WPA-PSK破解实战"><a href="#四、使用EWSA进行WPA-PSK破解实战" class="headerlink" title="四、使用EWSA进行WPA-PSK破解实战"></a>四、使用EWSA进行WPA-PSK破解实战</h2><p>1、测试环境<br>2、具体操作步骤</p>
-<ul>
-<li>1、<em>程序中打开EWSA先进行自检</em>。主界面分别选择options中的cpu options及gpu power查看检测结果。在gpu utilization 窗口右侧选择display drivers info，可以查看更多关于显卡的信息</li>
-<li>2、<em>设置字典位置</em>。在options下拉菜单中选dictionary mutation options，选定字典。</li>
-<li>3、<em>导入事先捕获的wpa-psk握手验证数据包</em>。若成功捕获到完整的握手，就可以直接诶导入，若该数据包中包含的握手有很多，则EWSA会从中挑出完整的握手报文导入。若是使用airodump-ng 捕获的cap数据包文件，可选择import tcpdump log来导入。</li>
-<li>4、<em>点击start attack开始破解</em>。等待结果</li>
-</ul>
-<h2 id="五、不同测试环境性能对比"><a href="#五、不同测试环境性能对比" class="headerlink" title="五、不同测试环境性能对比"></a>五、不同测试环境性能对比</h2><p>纯cpu和cpu+gpu速度对比</p>
-<h2 id="六、破解中可能面临的问题"><a href="#六、破解中可能面临的问题" class="headerlink" title="六、破解中可能面临的问题"></a>六、破解中可能面临的问题</h2><p>1、 在进行gpu运算时，cpu占用率100%，但内存使用率不高。<br>2、在进行gpu运算时，出现只调用cpu而无法调用gpu的情况。（某些高端显卡无此加速功能）<br>3、破解成功后，无法显示密码。（注册为完整版）<br>3、破解成功</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/06/gpu-wpa-crack/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -426,35 +413,12 @@
 
       
         
-          
-            <p>2008 北京 xKungFoo 黑客大会无线安全主题演讲—杨哲</p>
-<h3 id="ppt摘要"><a href="#ppt摘要" class="headerlink" title="ppt摘要"></a>ppt摘要</h3><h3 id="无线安全–传统安全的软肋"><a href="#无线安全–传统安全的软肋" class="headerlink" title="无线安全–传统安全的软肋"></a>无线安全–传统安全的软肋</h3><p>WEP—LEAP—-WPA-PSK/WPA—WPA2-PSK/WPA2  </p>
-<p><strong>常用设备：笔记本电脑、无线网卡、外置天线、GPS</strong></p>
-<h3 id="无线探测工具"><a href="#无线探测工具" class="headerlink" title="无线探测工具"></a>无线探测工具</h3><p>Netstumble<br>Kismet<br>Airodump<br>Airsnort<br>Omnipeek</p>
-<h3 id="针对WEP"><a href="#针对WEP" class="headerlink" title="针对WEP"></a>针对WEP</h3><p>Aircrack-ng<br>AiroPeek<br>Cain<br>OmniPeek</p>
-<h3 id="针对WPA-PSK、WPA2-PSK"><a href="#针对WPA-PSK、WPA2-PSK" class="headerlink" title="针对WPA-PSK、WPA2-PSK"></a>针对WPA-PSK、WPA2-PSK</h3><p>CowPatty<br>Aircrack-ng<br>Cain<br>难度：依赖字典、cpu主频限制</p>
-<h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>Wireless D.O.S<br>Wireless数据流截获及分析<br>伪造基站攻击<br>Wireless摄像装置入侵<br>WPA PMK Hash Table Attack<br>WPA-PAK/WPA2-PSK分布式破解</p>
-<p><strong>Wireless D.O.S</strong>: 客户端与ap建立连接，通过广播插入伪造的取消身份验证报文。客户端认为该报文来自AP，已链接诶客户端自行断开连接</p>
-<p><strong>Wireless频带阻塞干扰</strong>：攻击信号覆盖范围内，对指定频道进行阻塞干扰</p>
-<p><strong>Wireless数据流截获及分析</strong>：帐号密码 通信数据 voip音频流 截获，伪造AP进行数据报文截获攻击</p>
-<p><strong>VOIP音频流截获</strong>：正常voip语音通信及短消息被攻击者截获，伪造转录破坏通信内容，被迫断线或收到伪造信息</p>
-<p><strong>伪造基站攻击</strong>：（伪造ap攻击）</p>
-<p><strong>Wireless摄像装置入侵</strong>：破解无线wep/wpa加密，非法连接到无线摄像头，从外部窥视内部保密环境</p>
-<p><strong>WPA PMK Hash Table Attack</strong>: time-memory trade-off 即内存-时间平衡法，也可以翻译成 时间-内存交替运算法<br>制作WPA PMK Hash Table:<br>Cowpatty下的genpmk工具<br>Aircrack-ng下的airolib-ng工具</p>
-<p><strong>WPA-PSK/WPA2-PSK分布式破解</strong>：zerone security team内部研发项目</p>
-<ul>
-<li>提交wpa握手文件</li>
-<li>添加至计算任务列表</li>
-<li>查找现有hash库列表</li>
-<li>将任务分配至各分布端</li>
-<li>运算结果返回至服务器</li>
-</ul>
-<p><strong>国际上已经开展的分布式运算</strong>：free rainbow table、蛋白质、Elcomsoft</p>
-<p>来自nvidia的gpu技术理论速率提升至原来的30-100倍</p>
-<p>书籍推荐：<strong>《无线网络安全攻防实战》</strong><br>搜到其还出过一本  <strong>《无线网络黑客攻防(畅销版)(附DVD光盘)》</strong></p>
-<p>联系方式longaslast@gmail.com</p>
-
-          
+          <p>2008 北京 xKungFoo 黑客大会无线安全主题演讲—杨哲</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/06/xkungfoo-yangzhe-2008/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -564,16 +528,14 @@
 
       
         
-          
-            <h3 id="简易嗅探"><a href="#简易嗅探" class="headerlink" title="简易嗅探"></a>简易嗅探</h3><p>所谓“简易嗅探”，就是指dSploit这个软件可以嗅探到被监控的设备收到和发出的所有网络封包，并将封包以pcap格式保存到Android手机中。这样，后续只需要用文本编辑器查看这些pcap文件，就能得到相关的信息。</p>
-<p>可以进一步判明设备的类型和使用的操作系统和浏览器版本</p>
-<p>通过嗅探，拿到qq号码，微信绑定qq号，进一步掌握微信账号和其他社交账号，访问网站。</p>
-<h3 id="会话劫持"><a href="#会话劫持" class="headerlink" title="会话劫持"></a>会话劫持</h3><p>通过会话劫持，拿到qq邮箱及其他社交账号权限。</p>
-<h3 id="脚本注入"><a href="#脚本注入" class="headerlink" title="脚本注入"></a>脚本注入</h3><p>通过dSploit的 “脚本注入”功能可实现将事先编辑好的一段文字，通过Java脚本的形式，推送到目标电脑上。</p>
-<p>输入要注入的JS代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"> alert(&apos;善意提醒。。。。。。）；</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-
-          
+          <blockquote>
+<p>根据别人教程中涉及到dSploit的内容截取到的一小段文字。</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/04/dSploit/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -684,7 +646,8 @@
       
         
           
-            <h2 id="4-3数据恢复技术：（物理恢复和逻辑恢复）"><a href="#4-3数据恢复技术：（物理恢复和逻辑恢复）" class="headerlink" title="4.3数据恢复技术：（物理恢复和逻辑恢复）"></a>4.3数据恢复技术：（物理恢复和逻辑恢复）</h2><h3 id="删除的文件"><a href="#删除的文件" class="headerlink" title="删除的文件"></a>删除的文件</h3><p>文件目录存在、数据区均完整（文件快速恢复）</p>
+            <a id="more"></a>
+<h2 id="4-3数据恢复技术：（物理恢复和逻辑恢复）"><a href="#4-3数据恢复技术：（物理恢复和逻辑恢复）" class="headerlink" title="4.3数据恢复技术：（物理恢复和逻辑恢复）"></a>4.3数据恢复技术：（物理恢复和逻辑恢复）</h2><h3 id="删除的文件"><a href="#删除的文件" class="headerlink" title="删除的文件"></a>删除的文件</h3><p>文件目录存在、数据区均完整（文件快速恢复）</p>
 <p>文件目录不存在、数据区完整（文件签名恢复）</p>
 <p>文件目录不存在、数据区不完整（关键词搜索手工恢复）</p>
 <h3 id="文件签名恢复"><a href="#文件签名恢复" class="headerlink" title="文件签名恢复"></a>文件签名恢复</h3><p>取证软件支持从未分配簇中恢复制定类型的文件<br>exe文件 ：  4D 5A<br>office文件 ： D0 CF 11 E0 A1 B1 1A E1 00 00<br>zip文件  : 50 4B 03 04<br>jpg文件： \xFF\xD8\xFF\xE0</p>
@@ -814,24 +777,16 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p><strong>hexo是一个挺好的博客程序，但是就是更新的时候必须在部署好的机器上发布，换了一台电脑的话就要重新部署环境，比较麻烦。</strong></p>
 <p><strong>思路：在raspberry上复制台式机hexo环境，如果不在办公室，可以在任何一台电脑ssh到respberry上写博客。</strong></p>
 <p><strong>环境：一台已经搭建过hexo的raspberry</strong></p>
 </blockquote>
-<h3 id="拷贝台式机的blog目录到raspberry"><a href="#拷贝台式机的blog目录到raspberry" class="headerlink" title="拷贝台式机的blog目录到raspberry"></a>拷贝台式机的blog目录到raspberry</h3><p>因为blog目录下文件是在太多了，所以在本地zip压缩好后利用btsync同步到raspberry /var/www/html/目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip blog.zip</div></pre></td></tr></table></figure></p>
-<h3 id="复制本机私钥到raspberry"><a href="#复制本机私钥到raspberry" class="headerlink" title="复制本机私钥到raspberry"></a>复制本机私钥到raspberry</h3><p>把本机is_rsa文件放入 /root/.ssh/下</p>
-<h3 id="建立所需配置文件"><a href="#建立所需配置文件" class="headerlink" title="建立所需配置文件"></a>建立所需配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd blog</div><div class="line">npm install</div></pre></td></tr></table></figure>
-<p>到这一步raspberry上已经可以展示原先的页面了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s</div></pre></td></tr></table></figure></p>
-<p>输入 <a href="http://raspberry_ip:4000" target="_blank" rel="external">http://raspberry_ip:4000</a>  出来的是本机上一模一样的博客页面</p>
-<p>因为要部署到github上，所以还需要以下两步</p>
-<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-<h3 id="制定用户名和邮箱"><a href="#制定用户名和邮箱" class="headerlink" title="制定用户名和邮箱"></a>制定用户名和邮箱</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;jack&quot;//用户名</div><div class="line">$ git config --global user.email  &quot;onejustone@gmail.com&quot;//写自己的邮箱</div></pre></td></tr></table></figure>
-<h3 id="最后一步"><a href="#最后一步" class="headerlink" title="最后一步"></a>最后一步</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d</div></pre></td></tr></table></figure>
-<p>这样本机和raspberry都可以发布博客了。为了保持两边数据一致，用btsync同步树莓派和本机的_post文件夹，只需要同步文章就可以了。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/02/hexo-zhuanyi/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -941,19 +896,13 @@
 
       
         
-          
-            <p>VPS 部署心得</p>
+          <p>VPS 部署心得</p>
 <p>现在如果手里有一台 VPS, 我做的第一件事一定是安装 docker,至于原因么, 有很多, 最重要的一点是它真的很方便.</p>
-<h3 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -fsSL https://get.docker.com/ | sh</div></pre></td></tr></table></figure>
-<h3 id="Mongo-安装"><a href="#Mongo-安装" class="headerlink" title="Mongo 安装"></a>Mongo 安装</h3><p>写 mongo 的配置文件.(我的习惯, 在 Home 目录下创建文件夹名为 Mongo 并 进入)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vim mongodb.conf</div><div class="line">#   文件内容如下:</div><div class="line">net:</div><div class="line">   bindIp:</div><div class="line">      - 127.0.0.1</div><div class="line">   port: 27017</div></pre></td></tr></table></figure></p>
-<p>运行 mongo 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker run --name mongo-server -d \</div><div class="line">--restart=always \</div><div class="line">-p 27017:27017 \</div><div class="line">-v $(pwd)/data:/data/db \</div><div class="line">-v $(pwd)/mongodb.conf:/etc/mongodb.conf \</div><div class="line">mongo3.2 --config /etc/mongodb.conf</div></pre></td></tr></table></figure></p>
-<h3 id="VPN-L2TP-安装"><a href="#VPN-L2TP-安装" class="headerlink" title="VPN(L2TP) 安装"></a>VPN(L2TP) 安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">docker run --name vpn-server -d \</div><div class="line">--restart=always \</div><div class="line">--privileged \</div><div class="line">-p 500:500/udp \</div><div class="line">-p 4500:4500/udp \</div><div class="line">-p 1701:1701/tcp \</div><div class="line">-e PSK=hkvps \</div><div class="line">-e USERNAME=vpnuser \</div><div class="line">-e PASSWORD=xiaobai123 \</div><div class="line">siomiz/softethervpn</div></pre></td></tr></table></figure>
-<h3 id="Shadowsocks-安装"><a href="#Shadowsocks-安装" class="headerlink" title="Shadowsocks 安装"></a>Shadowsocks 安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker run --name shadowsocks-server -d \</div><div class="line">--restart=always \</div><div class="line">--privileged \</div><div class="line">-p 21:21 \</div><div class="line">tommylau/shadowsocks -s 0.0.0.0 -p 21 -k xiaobai123. -m chacha20</div></pre></td></tr></table></figure>
-<h3 id="Hexo-部署"><a href="#Hexo-部署" class="headerlink" title="Hexo 部署"></a>Hexo 部署</h3><p>写 caddy 的配置文件.(我的习惯, 在 Home 目录下创建文件夹名为 Caddy 并 进入)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim Caddyfile</div><div class="line">内容如下:</div><div class="line">mashiro.io www.mashiro.io blog.mashiro.io &#123;</div><div class="line">     gzip</div><div class="line">     tls iyannik0215@gmail.com</div><div class="line">     git https://github.com/iyannik0215/iyannik0215.github.io &#123;</div><div class="line">          interval 60</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行 caddy 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ocker run --name hexo-server -d \</div><div class="line">--restart=always \</div><div class="line">-p 80:80 \</div><div class="line">-p 443:443 \</div><div class="line">-v $(pwd)/Caddyfile:/etc/Caddyfile \</div><div class="line">-v $(pwd)/iyannik0215.github.io:/srv \</div><div class="line">-v $HOME/.caddy:/.caddy \</div><div class="line">abiosoft/caddy</div></pre></td></tr></table></figure></p>
-<p>参考：<a href="https://www.mashiro.io/2016/06/docker-hexo/" target="_blank" rel="external">将 Hexo 装入 Docker</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/02/vps-docker/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1063,28 +1012,12 @@
 
       
         
-          
-            <p>树莓派安装好后的一些设置</p>
-<p>###解放root</p>
-<ul>
-<li><p>设置root密码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo passwd root</div></pre></td></tr></table></figure>
-</li>
-<li><p>解锁root账户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo passwd --unlock root</div></pre></td></tr></table></figure>
-</li>
-<li><p>启用root ssh登录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo viim /etc/ssh/sshd_config</div><div class="line"></div><div class="line">   PermitRootLogin without-password</div><div class="line">   # 修改成</div><div class="line">   PermitRootLogin yes</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用root登录系统</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo systemctl restart ssh.service</div><div class="line">$ exit  #推出pi帐号</div><div class="line">$ ssh root@ip</div><div class="line"></div><div class="line">###设置时区、语言和磁盘</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>$ respi-config<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1、 用来恢复sd卡大小</div><div class="line">2、用来设置时区和语言</div><div class="line"></div><div class="line">### 常用软件</div></pre></td></tr></table></figure></p>
-<p>sudo apt-get install vim  wget curl htop git axel zip<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###外挂磁盘</div><div class="line">直接编辑 boot 中的 config.txt,添加：</div></pre></td></tr></table></figure></p>
-<p>$ max_usb_current=1<br>```</p>
-
-          
+          <p>树莓派安装好后的一些设置</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/02/raspberry-config/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1194,58 +1127,20 @@
 
       
         
-          
-            <p>Github + Hexo 搭建博客拓展知识</p>
-<p>##一、前言<br>相关知识要点：</p>
+          <p>Github + Hexo 搭建博客拓展知识</p>
+<h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>相关知识要点：</p>
 <ul>
-<li><a href="http://git-scm.com/book/zh/v2" target="_blank" rel="external">Git</a></li>
-<li><a href="https://github.com/" target="_blank" rel="external">Github</a></li>
-<li><a href="https://pages.github.com/" target="_blank" rel="external">GitHub Pages</a></li>
-<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a></li>
-<li><a href="http://www.appinn.com/markdown/#autoescape" target="_blank" rel="external">Makedown</a></li>
+<li><a href="http://git-scm.com/book/zh/v2">Git</a></li>
+<li><a href="https://github.com/">Github</a></li>
+<li><a href="https://pages.github.com/">GitHub Pages</a></li>
+<li><a href="https://hexo.io/zh-cn/">Hexo</a></li>
+<li><a href="http://www.appinn.com/markdown/#autoescape">Makedown</a></li>
 </ul>
-<p>##二、必要配置</p>
-<p>###2.1 GitHub Pages仓库<br>两种类型：<br>User/Organization：展示用户、必须使用username.github.io、使用仓库的master分支，通过username.github.io访问<br>Project Pages：展示项目、没有特定命名规则、使用gh-pages分支，通过username.github.io/projectname访问</p>
-<p>###2.2 Git<br>2.2.1 安装Git<br>1.<a href="http://git-scm.com/download/win" target="_blank" rel="external">Git官方版本的安装</a><br>2.<a href="https://desktop.github.com/" target="_blank" rel="external">GitHub for Windows</a><br>2.2.2 配置Git<br>安装完Git的第一件事情就是设置用户名称和邮件地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name&quot;username&quot;</div><div class="line">$ git config --global user.email &quot;username@example.com&quot;</div></pre></td></tr></table></figure></p>
-<p>如果想隐藏自己邮件地址，可以在Github设置里选择Keeping your email address private<br>同时可以用以下格式配置你的邮件地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.email &quot;username@users.noreply.github.com&quot;</div></pre></td></tr></table></figure></p>
-<p>2.2.3相关资料</p>
-<ul>
-<li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external">安装Git</a></li>
-<li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE" target="_blank" rel="external">配置Git</a></li>
-<li><a href="https://help.github.com/articles/setting-your-email-in-git/" target="_blank" rel="external">Setting your email in Git</a></li>
-<li><a href="https://help.github.com/articles/keeping-your-email-address-private/" target="_blank" rel="external">Keeping your email address private</a><br>###2.3Git 与 GitHub<br>2.3.1区别<br>git是一个版本控制工具，而github类似远程仓库，用于存放用git管理的各种项目。<br>2.3.2与github建立联系<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls -al ~/.ssh   #检查电脑是否已经有ssh keys</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果已经有id_ras.pub和id_rsa，则证明已存在SSH keys。如果没有，则要生成新的ssh keys：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@excample.com&quot;  #创建一个新ssh key，以邮件地址为标签</div></pre></td></tr></table></figure></p>
-<p>一路回车即可。接下去向ssh-agent添加key:<br>首先确保ssh-agent可运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh-agent -s   #start the ssh-agent in the background</div><div class="line">$ ssh-add ~/.ssh/id_rsa   #添加ssh key</div><div class="line">在github添加sshkey：</div><div class="line">把 ~/.ssh/id_rsa.pub内容粘帖到github--personal settings--ssh keys里</div><div class="line">最后测试链接：</div></pre></td></tr></table></figure></p>
-<p>ssh -T git@github.com #attempts to ssh to github<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">如果看到提示yes/no ，则键如yes，添加成功。</div><div class="line">相关资料：</div><div class="line">- [Generating SSH keys](https://help.github.com/articles/generating-ssh-keys/)</div><div class="line"></div><div class="line">#2.4 Hexo</div><div class="line">检查电脑是否安装了  node.js 和 git，如果已经安装：</div></pre></td></tr></table></figure></p>
-<p>npm install -g hexo-cli<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">安装完成后进入blog 目录</div></pre></td></tr></table></figure></p>
-<p>$ hexo init<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">安装依赖包</div></pre></td></tr></table></figure></p>
-<p>$ npm install<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">至此，本地hexo博客已经建成</div></pre></td></tr></table></figure></p>
-<p>$ hexo g<br>$ hexo d<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">localhost:4000就可以看到博客了。</div><div class="line"></div><div class="line">##部署到github</div><div class="line">在theme下的_config.yml修改成</div></pre></td></tr></table></figure></p>
-<p>deploy:<br>type:git<br>repo:对应仓库的ssh地址（比如git@github.com:username/username.github.io.git）<br>branch:分支（user pages为master,project pages为gh-pages）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">另外还需要安装一个插件：</div></pre></td></tr></table></figure></p>
-<p>npm install hexo-deployer-git –save<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">然后再执行：</div></pre></td></tr></table></figure></p>
-<p>hexo g<br>hexo d<br>```<br> 接下来，就可以用username.github.io访问你的博客了<br>其他主题：<br>可以用git clone 将别人的主题拷贝到hexo\themes下，然后将_config.yml中的theme:landscape改为对应的主题名字。</p>
-<p>##优化部署和管理</p>
-<p>###4.2 我的博客搭建流程<br>创建仓库，CrazyMilk.github.io；</p>
-<p>创建两个分支：master 与 hexo；</p>
-<p>设置hexo为默认分支（因为我们只需要手动管理这个分支上的Hexo网站文件）；</p>
-<p>使用git clone git@github.com:CrazyMilk/CrazyMilk.github.io.git拷贝仓库；</p>
-<p>在本地CrazyMilk.github.io文件夹下通过Git bash依次执行npm install hexo、hexo init、npm install 和 npm install hexo-deployer-git（此时当前分支应显示为hexo）;</p>
-<p>修改_config.yml中的deploy参数，分支应为master；</p>
-<p>依次执行git add .、git commit -m “…”、git push origin hexo提交网站相关的文件；</p>
-<p>执行hexo generate -d生成网站并部署到GitHub上。</p>
-<p>这样一来，在GitHub上的CrazyMilk.github.io仓库就有两个分支，一个hexo分支用来存放网站的原始文件，一个master分支用来存放生成的静态网页。完美( •̀ ω •́ )y！</p>
-<p>###4.3 我的博客管理流程<br>4.3.1 日常修改<br>在本地对博客进行修改（添加新博文、修改样式等等）后，通过下面的流程进行管理：</p>
-<p>依次执行git add .、git commit -m “…”、git push origin hexo指令将改动推送到GitHub（此时当前分支应为hexo）；</p>
-<p>然后才执行hexo generate -d发布网站到master分支上。</p>
-<p>虽然两个过程顺序调转一般不会有问题，不过逻辑上这样的顺序是绝对没问题的（例如突然死机要重装了，悲催….的情况，调转顺序就有问题了）。</p>
-<p>4.3.2 本地资料丢失</p>
-<p>当重装电脑之后，或者想在其他电脑上修改博客，可以使用下列步骤：</p>
-<p>使用git clone git@github.com:CrazyMilk/CrazyMilk.github.io.git拷贝仓库（默认分支为hexo）；</p>
-<p>在本地新拷贝的CrazyMilk.github.io文件夹下通过Git bash依次执行下列指令：npm install hexo、npm install、npm install hexo-deployer-git（记得，不需要hexo init这条指令）。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/02/github-hexo2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
