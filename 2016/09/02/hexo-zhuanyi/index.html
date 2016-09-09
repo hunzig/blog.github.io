@@ -1,51 +1,17 @@
-extends base
-
-block title
-  title= page.title + ' | ' + config.title
-
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>hexo转移到其他电脑 | hack70</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">hexo转移到其他电脑</h1><a id="logo" href="/.">hack70</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">hexo转移到其他电脑</h1><div class="post-meta">Sep 2, 2016<span> | </span><span class="category"><a href="/categories/linux/">linux</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><blockquote>
+<p><strong>hexo是一个挺好的博客程序，但是就是更新的时候必须在部署好的机器上发布，换了一台电脑的话就要重新部署环境，比较麻烦。</strong></p>
+<p><strong>思路：在raspberry上复制台式机hexo环境，如果不在办公室，可以在任何一台电脑ssh到respberry上写博客。</strong></p>
+<p><strong>环境：一台已经搭建过hexo的raspberry</strong></p>
+</blockquote>
+<a id="more"></a>
+<h3 id="拷贝台式机的blog目录到raspberry"><a href="#拷贝台式机的blog目录到raspberry" class="headerlink" title="拷贝台式机的blog目录到raspberry"></a>拷贝台式机的blog目录到raspberry</h3><p>因为blog目录下文件是在太多了，所以在本地zip压缩好后利用btsync同步到raspberry /var/www/html/目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip blog.zip</div></pre></td></tr></table></figure></p>
+<h3 id="复制本机私钥到raspberry"><a href="#复制本机私钥到raspberry" class="headerlink" title="复制本机私钥到raspberry"></a>复制本机私钥到raspberry</h3><p>把本机is_rsa文件放入 /root/.ssh/下</p>
+<h3 id="建立所需配置文件"><a href="#建立所需配置文件" class="headerlink" title="建立所需配置文件"></a>建立所需配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd blog</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<p>到这一步raspberry上已经可以展示原先的页面了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s</div></pre></td></tr></table></figure></p>
+<p>输入 <a href="http://raspberry_ip:4000" target="_blank" rel="external">http://raspberry_ip:4000</a>  出来的是本机上一模一样的博客页面</p>
+<p>因为要部署到github上，所以还需要以下两步</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<h3 id="制定用户名和邮箱"><a href="#制定用户名和邮箱" class="headerlink" title="制定用户名和邮箱"></a>制定用户名和邮箱</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;jack&quot;//用户名</div><div class="line">$ git config --global user.email  &quot;onejustone@gmail.com&quot;//写自己的邮箱</div></pre></td></tr></table></figure>
+<h3 id="最后一步"><a href="#最后一步" class="headerlink" title="最后一步"></a>最后一步</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d</div></pre></td></tr></table></figure>
+<p>这样本机和raspberry都可以发布博客了。为了保持两边数据一致，用btsync同步树莓派和本机的_post文件夹，只需要同步文章就可以了。</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://hack70.com/2016/09/02/hexo-zhuanyi/" data-id="cisvjxqge000deayjhbjgnu4z" class="article-share-link">分享到</a><div class="tags"><a href="/tags/hexo/">hexo</a></div><div class="post-nav"><a href="/2016/09/04/4jsjqz/" class="pre">计算机取证</a><a href="/2016/09/02/vps-docker/" class="next">vps中docker的应用</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://hack70.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/forensics/">forensics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hack/">hack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/免流/" style="font-size: 15px;">免流</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/wireless/" style="font-size: 15px;">wireless</a> <a href="/tags/梅林/" style="font-size: 15px;">梅林</a> <a href="/tags/raspberry/" style="font-size: 15px;">raspberry</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/gpu-wpa-crack/">GPU运算之无线WPA-PSK加密破解实战教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/xkungfoo-yangzhe-2008/">xKungFoo 黑客大会无线安全主题演讲---杨哲</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/dSploit/">手机内网渗透工具dSploit的简易使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/4jsjqz/">计算机取证</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/hexo-zhuanyi/">hexo转移到其他电脑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/vps-docker/">vps中docker的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/raspberry-config/">树莓派安装好后的一些设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/github-hexo2/">github+hexo拓展知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/28/meilin_crontab/">梅林固件定时重启脚本设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/27/ac68u_mianliu/">(原创)华硕ac68u搭建免流加饭强服务器</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">hack70.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
