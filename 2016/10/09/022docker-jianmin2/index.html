@@ -1,0 +1,211 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>docker简明教程二 | hack70</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">docker简明教程二</h1><a id="logo" href="/.">hack70</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">docker简明教程二</h1><div class="post-meta">Oct 9, 2016<span> | </span><span class="category"><a href="/categories/linux/">linux</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p>前言这篇博文承接我的上一篇《docker简明教程一》<br><a href="http://9399369.blog.51cto.com/9389369/1758576" target="_blank" rel="external">http://9399369.blog.51cto.com/9389369/1758576</a><br>相对于上一篇来说这篇所讲到的知识会高深一点因为学习的过程不就是一步步的由简单到复杂嘛但是我的风格没变用简单的文字让朋友们学习高深的docker技术。如果觉得我写的好的话顶我上推荐希望能让跟多人看到、学习和受益。</p>
+<h3 id="二十二、Docker导出容器到本地文件"><a href="#二十二、Docker导出容器到本地文件" class="headerlink" title="二十二、Docker导出容器到本地文件"></a>二十二、Docker导出容器到本地文件</h3><p>不管是容器不是处于运行状态都可以导出</p>
+<p>首先查看那容器状态</p>
+<p>[root@docker ~]# docker ps -a<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>2424fa7a5346 docker.io/ubuntu:latest “/bin/sh -c top” 24 minutes ago Exited (1) 42 seconds ago dreamy_ritchie<br>8c8420123536 docker.io/ubuntu:latest “/bin/sh” 25 minutes ago Exited (0) 25 minutes ago modest_banach<br>11c1437847cb docker.io/ubuntu:latest “/bin/bash” 44 minutes ago Exited (0) 42 minutes ago mad_fermi<br>6378eb77bbdf docker.io/ubuntu:latest “/bin/bash” 3 hours ago Exited (0) 3 hours ago berserk_bhaskara<br>940e7ebbb19d docker.io/ubuntu:latest “/bin/bash” 3 hours ago Exited (127) 3 hours ago desperate_mayer<br>5dbb944ba21f docker.io/ubuntu “/bin/bash” 4 hours ago Up 17 seconds hopeful_mahavira<br>[root@docker ~]#</p>
+<p>导出一个终止状态的</p>
+<p>[root@docker ~]# docker export 940e7e &gt;fwc_rongqi.tar<br>[root@docker ~]# ls<br>anaconda-ks.cfg fuchao_latest fwc_rongqi.tar<br>[root@docker ~]#</p>
+<p>导出一个运行状态的</p>
+<p>[root@docker ~]# docker export 5dbb94 &gt;fwc_run.tar<br>[root@docker ~]# ls<br>anaconda-ks.cfg fuchao_latest fwc_rongqi.tar fwc_run.tar<br>[root@docker ~]#</p>
+<h3 id="二十三、Docker导入文件成镜像"><a href="#二十三、Docker导入文件成镜像" class="headerlink" title="二十三、Docker导入文件成镜像"></a>二十三、Docker导入文件成镜像</h3><p>Docker导入文件成镜像</p>
+<p>[root@docker ~]# cat fwc_run.tar |docker import - vesion01<br>5c444b262c652502ed151ece095717cad0b05a1adbf417e8ef3680f97000f34f</p>
+<p>查看生成的镜像<br>[root@docker ~]# docker images<br>REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE<br>vesion01 latest 5c444b262c65 31 seconds ago 187.7 MB</p>
+<p>import方式导入的是快照。</p>
+<h3 id="二十四、Docker创建本地仓库"><a href="#二十四、Docker创建本地仓库" class="headerlink" title="二十四、Docker创建本地仓库"></a>二十四、Docker创建本地仓库</h3><p>利用官方的registry镜像搭建本地私有仓库</p>
+<p>[root@docker ~]# docker run -d -p 5000:5000 registry</p>
+<p>启动一个私有仓库服务监听端口是5000.</p>
+<p>默认会在将仓库放在/tmp/registry目录下 也可以通过-v指定目录。</p>
+<p>查看启动的镜像</p>
+<p>[root@docker ~]# docker ps<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>96366790c3f4 registry “docker-registry” About a minute ago Up About a minute 0.0.0.0:5000-&gt;5000/tcp stoic_noyce</p>
+<p>可以看到 坚挺的端口是5000.</p>
+<h3 id="二十五、Docker管理本地仓库"><a href="#二十五、Docker管理本地仓库" class="headerlink" title="二十五、Docker管理本地仓库"></a>二十五、Docker管理本地仓库</h3><p>首先给镜像打上标签很重要<br>[root@docker ~]# docker tag fuchao:latest 127.0.0.1:5000/cangku_ceshi</p>
+<p>docker tag 镜像标签 ip端口/自定义的name</p>
+<p>上传到私有仓库<br>[root@docker ~]# docker push 127.0.0.1:5000/cangku_ceshi<br>The push refers to a repository [127.0.0.1:5000/cangku_ceshi] (len: 1)<br>Sending image list<br>Pushing repository 127.0.0.1:5000/cangku_ceshi (1 tags)<br>895b070402bd: Image successfully pushed<br>02e5bca4149b: Image successfully pushed<br>b2ae0a712b39: Image successfully pushed<br>af88597ec24b: Image successfully pushed<br>8be9f7652ab5: Image successfully pushed<br>Pushing tag for rev [8be9f7652ab5] on {<a href="http://127.0.0.1:5000/v1/repositories/cangku_ceshi/tags/latest}" target="_blank" rel="external">http://127.0.0.1:5000/v1/repositories/cangku_ceshi/tags/latest}</a><br>[root@docker ~]#</p>
+<p>从私有仓库下载</p>
+<p>[root@docker ~]# docker pull 127.0.0.1:5000/cangku_ceshi<br>Using default tag: latest<br>8be9f7652ab5: Download complete<br>895b070402bd: Download complete<br>02e5bca4149b: Download complete<br>b2ae0a712b39: Download complete<br>af88597ec24b: Download complete<br>Status: Image is up to date for 127.0.0.1:5000/cangku_ceshi:latest</p>
+<p>[root@docker ~]#</p>
+<p>上面的不仅本机可以 别的电脑也可以。上传、下载。</p>
+<h3 id="二十六、Docker挂在一个主机目录到容器中作为数据卷"><a href="#二十六、Docker挂在一个主机目录到容器中作为数据卷" class="headerlink" title="二十六、Docker挂在一个主机目录到容器中作为数据卷"></a>二十六、Docker挂在一个主机目录到容器中作为数据卷</h3><p>数据卷的优点</p>
+<p>数据卷可以在容器之间共享和重用</p>
+<p>对数据卷的修改会立刻生效</p>
+<p>指定本机的/src/到容器的/src/下作为数据卷<br>[root@docker ~]# docker run -d -v /src/:/src/ docker.io/ubuntu:latest /bin/sh -c “while true;do echo fwc; sleep 1;done”<br>496d36766cc6c17b6ac9bc00437ab9d41d0c618dfaf66c10f78d9629ddad3424<br>[root@docker ~]# docker ps<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>496d36766cc6 docker.io/ubuntu:latest “/bin/sh -c ‘while tr” 6 seconds ago Up 4 seconds dreamy_lovelace</p>
+<p>进入启动的容器中</p>
+<p>[root@docker ~]# docker exec -ti 496d3676 /bin/bash</p>
+<p>查看容器中的src目录的内容看看它是不是挂载本机了。<br>root@496d36766cc6:/# cd src/<br>root@496d36766cc6:/src# ls -al<br>total 4<br>drwxr-xr-x. 4 root root 32 Jan 7 03:03 .<br>drwxr-xr-x. 22 root root 4096 Jan 7 03:07 ..<br>drwxr-xr-x. 2 root root 6 Jan 7 03:03 fuchao<br>drwxr-xr-x. 2 root root 6 Jan 7 03:01 webapp</p>
+<p>查看本机的src目录</p>
+<p>[root@docker ~]# cd /src/<br>[root@docker src]# ls -al<br>total 4<br>drwxr-xr-x. 4 root root 32 Jan 6 19:03 .<br>dr-xr-xr-x. 18 root root 4096 Jan 6 19:01 ..<br>drwxr-xr-x. 2 root root 6 Jan 6 19:03 fuchao<br>drwxr-xr-x. 2 root root 6 Jan 6 19:01 webapp</p>
+<p>可以看到成功的挂载本机目录到容器中了。</p>
+<p>现在我们在本地创建一个新的目录</p>
+<p>[root@docker src]# mkdir fwc</p>
+<p>我们立刻去容器中查看src目录看看是不是立刻生效了</p>
+<p>root@496d36766cc6:/src# ls -al<br>total 4<br>drwxr-xr-x. 5 root root 42 Jan 7 03:10 .<br>drwxr-xr-x. 22 root root 4096 Jan 7 03:07 ..<br>drwxr-xr-x. 2 root root 6 Jan 7 03:03 fuchao<br>drwxr-xr-x. 2 root root 6 Jan 7 03:10 fwc<br>drwxr-xr-x. 2 root root 6 Jan 7 03:01 webapp<br>root@496d36766cc6:/src#</p>
+<p>可以看到立刻生效</p>
+<h3 id="二十七、Docker数据卷容器"><a href="#二十七、Docker数据卷容器" class="headerlink" title="二十七、Docker数据卷容器"></a>二十七、Docker数据卷容器</h3><p>Docker数据卷管理器就是一个一般的容器专门供其他容器挂载。</p>
+<p>首先创建一个名字是dbdata的数据卷容器创建一个数据卷载到 /dbdata</p>
+<p>[root@docker ~]# docker run -ti -v /dbdata –name dbdata docker.io/ubuntu</p>
+<p>测试查看</p>
+<p>root@949c4ad58567:/# ls<br>bin dbdata etc lib media opt root sbin sys usr<br>boot dev home lib64 mnt proc run srv tmp var<br>root@949c4ad58567:/#</p>
+<p>可以发现出现了数据卷dbdata</p>
+<p>现在我们在其它俩容器中挂载这个数据卷容器</p>
+<p>创建一个容器挂载刚才创建的数据卷容器</p>
+<p>[root@docker ~]# docker run -ti –volumes-from dbdata –name db_fuchao1 docker.io/ubuntu</p>
+<p>测试查看</p>
+<p>root@34509b0bb7f7:/# ls<br>bin dbdata etc lib media opt root sbin sys usr<br>boot dev home lib64 mnt proc run srv tmp var<br>root@34509b0bb7f7:/#</p>
+<p>可以看到挂载成功</p>
+<p>再创建一个挂载刚才创建的数据卷容器</p>
+<p>[root@docker ~]# docker run -ti –volumes-from dbdata –name db_fuchao2<br>root@d1cc9746eb70:/# cd dbdata/<br>root@d1cc9746eb70:/dbdata# ls -al<br>total 4<br>drwxr-xr-x. 2 root root 19 Jan 7 03:35 .<br>drwxr-xr-x. 22 root root 4096 Jan 7 03:28 ..<br>-rw-r–r–. 1 root root 0 Jan 7 03:35 fuchao<br>root@d1cc9746eb70:/dbdata# docker.io/ubuntu<br>测试查看</p>
+<p>root@d1cc9746eb70:/# ls<br>bin dbdata etc lib media opt root sbin sys usr<br>boot dev home lib64 mnt proc run srv tmp var<br>root@d1cc9746eb70:/#</p>
+<p>现在我们在数据卷容器的数据卷内做修改看看另外挂载它的容器是不是生效了</p>
+<p>root@949c4ad58567:/dbdata# touch fuchao<br>root@949c4ad58567:/dbdata# ls -al<br>total 4<br>drwxr-xr-x. 2 root root 19 Jan 7 03:35 .<br>drwxr-xr-x. 22 root root 4096 Jan 7 03:26 ..<br>-rw-r–r–. 1 root root 0 Jan 7 03:35 fuchao<br>root@949c4ad58567:/dbdata#</p>
+<p>db_fuchao1<br>root@34509b0bb7f7:/# cd dbdata/<br>root@34509b0bb7f7:/dbdata# ls -al<br>total 4<br>drwxr-xr-x. 2 root root 19 Jan 7 03:35 .<br>drwxr-xr-x. 22 root root 4096 Jan 7 03:27 ..<br>-rw-r–r–. 1 root root 0 Jan 7 03:35 fuchao<br>root@34509b0bb7f7:/dbdata#</p>
+<p>db_fuchao2<br>root@d1cc9746eb70:/# cd dbdata/<br>root@d1cc9746eb70:/dbdata# ls -al<br>total 4<br>drwxr-xr-x. 2 root root 19 Jan 7 03:35 .<br>drwxr-xr-x. 22 root root 4096 Jan 7 03:28 ..<br>-rw-r–r–. 1 root root 0 Jan 7 03:35 fuchao<br>root@d1cc9746eb70:/dbdata#</p>
+<p>db_fuchao1</p>
+<p>root@d1cc9746eb70:/# cd dbdata/<br>root@d1cc9746eb70:/dbdata# ls -al<br>total 4<br>drwxr-xr-x. 2 root root 19 Jan 7 03:35 .<br>drwxr-xr-x. 22 root root 4096 Jan 7 03:28 ..<br>-rw-r–r–. 1 root root 0 Jan 7 03:35 fuchao<br>root@d1cc9746eb70:/dbdata#</p>
+<p>数据卷容器<br>root@d1cc9746eb70:/# cd dbdata/<br>root@d1cc9746eb70:/dbdata# ls -al<br>total 4<br>drwxr-xr-x. 2 root root 19 Jan 7 03:35 .<br>drwxr-xr-x. 22 root root 4096 Jan 7 03:28 ..<br>-rw-r–r–. 1 root root 0 Jan 7 03:35 fuchao<br>root@d1cc9746eb70:/dbdata#</p>
+<p>我们可以知道任何一个做出修改所有的都会立刻生效</p>
+<h3 id="二十八、Docker删除容器中的数据卷"><a href="#二十八、Docker删除容器中的数据卷" class="headerlink" title="二十八、Docker删除容器中的数据卷"></a>二十八、Docker删除容器中的数据卷</h3><p>上一篇中我们一共创建了三个容器一个容器作为数据卷容器另外两个容器挂载它。</p>
+<p>现在我们想要删除其中的数据卷</p>
+<p>首先随便删除容器</p>
+<p>数据卷容器删除<br>[root@docker ~]# docker rm 949c4ad585<br>949c4ad585</p>
+<p>db_fuchao1删除<br>[root@docker ~]# docker rm 34509b0<br>34509b0</p>
+<p>重头戏</p>
+<p>[root@docker ~]# docker rm -v d1cc974<br>d1cc974<br>[root@docker ~]#</p>
+<p>删除最后一个的时候 加上-v参数就行了</p>
+<h3 id="二十九、Docker容器内端口映射到本地端口"><a href="#二十九、Docker容器内端口映射到本地端口" class="headerlink" title="二十九、Docker容器内端口映射到本地端口"></a>二十九、Docker容器内端口映射到本地端口</h3><p>首先启动一个容器<br>[root@docker ~]# docker run -d -P training/webapp python app.py<br>160cb35c7e18aa13bad50841ad43076b41341199c5753fec3ca1692961467519</p>
+<p>-P 大写的P 随机指定一个端口<br>查看<br>[root@docker ~]# docker ps -l<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>160cb35c7e18 training/webapp “python app.py” 7 seconds ago Up 6 seconds 0.0.0.0:32770-&gt;5000/tcp adoring_sinoussi</p>
+<p>可以看到本地端口跟容器内端口相映射我们可以通过访问32770访问容器内端口号是5000的应用</p>
+<h3 id="三十、Docker映射指定地址的指定端口"><a href="#三十、Docker映射指定地址的指定端口" class="headerlink" title="三十、Docker映射指定地址的指定端口"></a>三十、Docker映射指定地址的指定端口</h3><p>可能你有多个网卡 你映射指定的端口使用下面的命令 -p是小写的<br>[root@docker ~]# docker run -d -p 192.168.1.113:5200:80 training/webapp python app.py<br>4e46caf7fd57f85eef418dbb1dbcbb5c95086c9f1021ba4a7131bd2d7122f8b9</p>
+<p>查看<br>[root@docker ~]# docker ps -l<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>4e46caf7fd57 training/webapp “python app.py” 7 seconds ago Up 5 seconds 5000/tcp, 192.168.1.113:5200-&gt;80/tcp kickass_hoover<br>[root@docker ~]#</p>
+<h3 id="三十一、Docker容器互联实现容器间通信"><a href="#三十一、Docker容器互联实现容器间通信" class="headerlink" title="三十一、Docker容器互联实现容器间通信"></a>三十一、Docker容器互联实现容器间通信</h3><p>首先创建容器 aaa<br>[root@docker ~]# docker run -d –name aaa docker.io/ubuntu:latest /bin/sh -c “while true;do echo fwc; sleep 1;done”<br>f6e651b75c39e8dc842f1b669fcb7ead4716f66644e26bbf4b51acd7e64c0368<br>[root@docker ~]# docker ps -l<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>f6e651b75c39 docker.io/ubuntu:latest “/bin/sh -c ‘while tr” 11 seconds ago Up 8 seconds aaa<br>[root@docker ~]#</p>
+<p>创建容器b的时候实现互联</p>
+<p>[root@docker ~]# docker run -d -P –name bbb –link aaa:aaa docker.io/ubuntu:latest /bin/sh -c “while true;do echo fwc; sleep 1;done”<br>f1f9e536cfc90c7185bd1011b3b5e1b3fa6b4c964ec176cd28004e7d124fa94d</p>
+<h3 id="三十二、Dockerfile介绍"><a href="#三十二、Dockerfile介绍" class="headerlink" title="三十二、Dockerfile介绍"></a>三十二、Dockerfile介绍</h3><p>Dockerfile是一种文本格式的配置文件利用它可以创建自定义的镜像。也就是定制镜像</p>
+<p>它类似于脚本文件从上往下执行。</p>
+<h3 id="三十三、Docker-Busybox-linux命令练习软件集"><a href="#三十三、Docker-Busybox-linux命令练习软件集" class="headerlink" title="三十三、Docker Busybox linux命令练习软件集"></a>三十三、Docker Busybox linux命令练习软件集</h3><p>下载镜像到本地<br>[root@docker ~]# docker pull busybox</p>
+<p>查看大小</p>
+<p>[root@docker ~]# docker images<br>REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE<br>docker.io/ubuntu latest af88597ec24b 2 days ago 187.9 MB<br>docker.io/busybox latest fc0db02f3072 4 weeks ago 1.113 MB</p>
+<p>可以看到最新的菜1.113MB真是小方便。</p>
+<p>测试<br>[root@docker ~]# docker run -ti busybox<br>/ # ping www.baidu.com<br>PING www.baidu.com (61.135.169.125): 56 data bytes<br>64 bytes from 61.135.169.125: seq=0 ttl=53 time=24.631 ms<br>64 bytes from 61.135.169.125: seq=1 ttl=53 time=26.526 ms<br>^C<br>— www.baidu.com ping statistics —<br>2 packets transmitted, 2 packets received, 0% packet loss<br>round-trip min/avg/max = 24.631/25.578/26.526 ms<br>/ #</p>
+<p>当然不只有ping 有一百多个呢你自己练习吧。</p>
+<h3 id="三十四、Docker里一些常用的技术"><a href="#三十四、Docker里一些常用的技术" class="headerlink" title="三十四、Docker里一些常用的技术"></a>三十四、Docker里一些常用的技术</h3><p>Datadog公司分析报告<br>数以千计的公司使用Datadog来跟踪基础架构所以他们公司的数据值得信任</p>
+<p>使用最为广泛的镜像是RegistryNGINX和Redis<br>Docker里运行的最常用技术是</p>
+<p>Registry运行Docker的公司中25%的公司正在使用Registry可能用其来代替Docker Hub我们通常公司搭建本地数据仓库的时候都会用到简单、方便、好用</p>
+<p>NGINXDocker看来被用来包含了很多HTTP服务器。很有意思的Apachehttpd并不是前十名nginx作为轻量级web服务器高效性有目共睹</p>
+<p>Redis流行的内存内键值key–&gt;value数据存储通常用来作为内存内数据库消息队列或者缓存。</p>
+<p>Ubuntu依然是构建镜像的默认选择。</p>
+<p>Logspout用来从主机上的所有容器里收集日志并且将日志路由到任意需要的地方。</p>
+<p>MongoDB使用广泛的NoSQL数据库,文档型数据库MongoDB 是一个基于分布式文件存储的数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。</p>
+<p>Elasticsearch全文本搜索。</p>
+<p>CAdvisorKubernetes用来从容器里收集度量参数。</p>
+<p>MySQL使用最为广泛的开源数据库。</p>
+<p>Postgres使用第二广泛的开源数据库。将Postgres和MySQL的数量相加可见使用Docker运行关系型数据库非常常见。</p>
+<h3 id="三十五、Docker在企业部署的时候需要先思考的几点"><a href="#三十五、Docker在企业部署的时候需要先思考的几点" class="headerlink" title="三十五、Docker在企业部署的时候需要先思考的几点"></a>三十五、Docker在企业部署的时候需要先思考的几点</h3><p>1你需要docker为你的企业做些什么<br>这个具体情况具体分析。</p>
+<p>2那么docker它能干嘛<br>Hub仓库存放你企业的所有镜像<br>Images镜像Docker可以通过Pull和Push命令构建对象到服务中心<br>Containers容器Docker可以通过Start/Stop命令管理容器的生命周期<br>Logging日志Docker可以通过stdoutstderro捕获输出所有的容器内部信息<br>Volumes存储Docker可以创建和管理容器的相关文件存储<br>Networking网络Docker可以创建管理虚拟的接口和内部所有容器之间的网络桥接<br>RPCDocker服务器提供允许外部程序去控制所有容器的行为的API</p>
+<p>3你是否需要docker为你提供的功能<br>同样具体问题具体分析</p>
+<p>4你的付出和回报成正比吗<br>你公司可能原有的系统架构就听好了不能为了用而用</p>
+<p>5你们公司的技术够用吗<br>没有那精钢钻别揽那瓷器活部署不行那就别做遇到问题不能很快解决也NO!</p>
+<h3 id="三十六、Docker的联合文件系统"><a href="#三十六、Docker的联合文件系统" class="headerlink" title="三十六、Docker的联合文件系统"></a>三十六、Docker的联合文件系统</h3><pre><code>当我们在下载docker镜像的时候会发现每一层都有一个id这是层的概念是AUFS 联合文件系统 中的重要概念
+
+
+联合文件系统UnionFS是一种分层、轻量级并且高性能的文件系统它支持对文件系统的修改作为一次提交来一层层的叠加同时可以将不同目录挂载到同一个虚拟文件系统下
+
+联合文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继承基于基础镜像没有父镜像可以制作各种具体的应用镜像。
+
+
+不同 Docker 容器就可以共享一些基础的文件系统层同时再加上自己独有的改动层大大提高了存储的效率。
+</code></pre><p>Docker 目前支持的联合文件系统种类包括 AUFS, btrfs, vfs 和 DeviceMapper</p>
+<h3 id="三十七、Docker检查运行中的容器的详细信息"><a href="#三十七、Docker检查运行中的容器的详细信息" class="headerlink" title="三十七、Docker检查运行中的容器的详细信息"></a>三十七、Docker检查运行中的容器的详细信息</h3><p>查看容器中详细信息命令很简单dcoker inspect id</p>
+<p>首先用docker ps查看所有启动的镜像</p>
+<p>[root@bogon ~]# docker ps<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>44ab452b47fe docker.io/ubuntu:latest “/bin/bash” About a minute ago Up About a minute prickly_blackwell<br>[root@bogon ~]#</p>
+<p>可以看到id是 44ab。。。。</p>
+<p>利用命令查看容器的详细信息<br>[root@bogon ~]# docker inspect 44ab452b4<br>[<br>{<br>“Id”: “44ab452b47fe639b2ec2d0c3fb75f8b270c007d2e83843c331130c32b67e6ca3”,<br>“Created”: “2016-01-12T13:46:16.365773903Z”,<br>“Path”: “/bin/bash”,<br>“Args”: [],<br>“State”: {</p>
+<p>输出太多了 我只截取了一部分。</p>
+<p>docker ps -a是查看所有的镜像不管启动没有。显示最近一个容器的命令是docker ps -l 。</p>
+<h3 id="三十八、Docker监控-stats"><a href="#三十八、Docker监控-stats" class="headerlink" title="三十八、Docker监控-stats"></a>三十八、Docker监控-stats</h3><p>查看容器统计信息查看容器的CPU利用率、内存的使用量以及可用内存总量。</p>
+<p>[root@bogon ~]# docker stats 44ab452b4<br>CONTAINER CPU % MEM USAGE/LIMIT MEM % NET I/O<br>44ab452b4 0.00% 4.448 MB/1.027 GB 0.43% 2.406 kB/648 B<br>CONTAINER CPU % MEM USAGE/LIMIT MEM % NET I/O<br>44ab452b4 0.00% 4.448 MB/1.027 GB 0.43% 2.406 kB/648 B<br>^C[root@bogon ~]#</p>
+<p>一直会运行 可以用 ctrl+c终止。</p>
+<p>还可以查看容器通过网络发送和接收的数据总量。</p>
+<p>一方面我们发送icmp包ping百度</p>
+<p>root@44ab452b47fe:/# ping www.baidu.com<br>PING www.a.shifen.com (61.135.169.125) 56(84) bytes of data.<br>64 bytes from 61.135.169.125: icmp_seq=1 ttl=54 time=25.3 ms<br>64 bytes from 61.135.169.125: icmp_seq=2 ttl=54 time=40.4 ms<br>64 bytes from 61.135.169.125: icmp_seq=3 ttl=54 time=25.6 ms<br>64 bytes from 61.135.169.125: icmp_seq=4 ttl=54 time=25.3 ms<br>64 bytes from 61.135.169.125: icmp_seq=5 ttl=54 time=25.0 ms<br>64 bytes from 61.135.169.125: icmp_seq=7 ttl=54 time=25.0 ms<br>64 bytes from 61.135.169.125: icmp_seq=8 ttl=54 time=25.9 ms</p>
+<p>另一方面我们在终端上输入命令 可以看待最后一列一直在增大</p>
+<p>^C[root@bogon ~]# docker stats 44ab452b4<br>CONTAINER CPU % MEM USAGE/LIMIT MEM % NET I/O<br>44ab452b4 0.06% 4.948 MB/1.027 GB 0.48% 3.914 kB/2.032 kB<br>CONTAINER CPU % MEM USAGE/LIMIT MEM % NET I/O<br>44ab452b4 0.06% 4.948 MB/1.027 GB 0.48% 3.914 kB/2.032 kB<br>CONTAINER CPU % MEM USAGE/LIMIT MEM % NET I/O<br>44ab452b4 0.06% 4.948 MB/1.027 GB 0.48% 4.012 kB/2.13 kB<br>CONTAINER CPU % MEM USAGE/LIMIT MEM % NET I/O<br>44ab452b4 0.06% 4.948 MB/1.027 GB 0.48% 4.012 kB/2.13 kB</p>
+<h3 id="三十九、linux内核的命名空间"><a href="#三十九、linux内核的命名空间" class="headerlink" title="三十九、linux内核的命名空间"></a>三十九、linux内核的命名空间</h3><p>命名空间是linux内核针对实现容器虚拟化映入的一个特性。</p>
+<p>命名空间的作用<br>它让我们创建的每个容器都有自己的命名空间运行在其中的应用都像是在独立的操作系统中运行一样命名空间保证了容器之间互不影响</p>
+<p>那么都有哪几种命名空间呢<br>1、进程命名空间<br>作用linux通过命名空间管理进程号同一个进程在不同的命名空间进程号不同<br>补充进程命名空间是一个父子结构子空间对于父空间可见。</p>
+<p>2、网络命名空间<br>作用通过网络命名空间实现网络隔离<br>补充docker采用虚拟网络设备将不同命名空间的网络设备连接到一起</p>
+<p>3、IPC命名空间<br>IPC介绍进程间交互方法<br>作用PID命名空间和IPC命名空间可以组合起来用同一个IPC名字空间内的进程可以彼此看见允许进行交互不同空间进程无法交互</p>
+<p>4、挂载命名空间<br>作用隔离文件目录</p>
+<p>5、UTS命名空间<br>作用让容器拥有独立的主机名和域名从而让容器看起来像个独立的主机</p>
+<p>6、用户命名空间<br>作用每个容器内上的用户跟宿主主机上不在一个命名空间</p>
+<h3 id="四十、linux内核的控制组"><a href="#四十、linux内核的控制组" class="headerlink" title="四十、linux内核的控制组"></a>四十、linux内核的控制组</h3><p>linux内核控制组作用<br>主要对共享资源进行隔离、限制、审计。只有能控制分配到容器的资源Docker才能避免多个容器同时运行时的系统资源竞争。</p>
+<p>控制组具有的功能</p>
+<p>1、资源限制<br>2、优先级<br>作用优先得到更多的cpu资源<br>3、资源审计<br>4、隔离<br>5、控制</p>
+<h3 id="四十一、Docker网络实现"><a href="#四十一、Docker网络实现" class="headerlink" title="四十一、Docker网络实现"></a>四十一、Docker网络实现</h3><p>众所周知docker网络是它薄弱的地方</p>
+<p>Docker的网络实现</p>
+<p>利用linux的网络命名空间和虚拟网络设备特别是veth pair</p>
+<p>1、基本原理<br>实现网络通信机器需要至少一个网络接口物理的或者虚拟的</p>
+<p>不同子网通信额外路由机制</p>
+<p>docker默认是虚拟的接口</p>
+<p>虚拟接口速率转发效率极高</p>
+<p>虚拟接口速率极高的原理linux通过在内核中进行数据复制来实现虚拟接口之间的数据转发。<br>通俗的将发送接口的发送缓存的数据直接复制到接收接口的接收缓存不用外部设备转换。</p>
+<p>2、网路创建<br>docker创建一个容器会做什么网络相关<br>1、创建一对虚拟接口分别放到宿主主机和新容器的 命名空间里</p>
+<p>2、宿主主机一端的虚拟接口会链接到默认的docker0网桥或着你指定的网桥上<br>而且有一个以veth开头的唯一名字</p>
+<p>3、容器里的虚拟接口放到容器里修改名字作为eth0</p>
+<p>4、从网桥可用地址段中获取一个空闲地址分配给容器的eth0网关则是docker0的ip</p>
+<p>然后就可以访问外部和连接其它容器了</p>
+<h3 id="四十二、LXC容器"><a href="#四十二、LXC容器" class="headerlink" title="四十二、LXC容器"></a>四十二、LXC容器</h3><p>原文地址<a href="http://www.cnblogs.com/lisperl/archive/2012/04/15/2450183.html" target="_blank" rel="external">http://www.cnblogs.com/lisperl/archive/2012/04/15/2450183.html</a><br>1.LXC是什么</p>
+<p>LXC是Linux containers的简称是一种基于容器的操作系统层级的虚拟化技术。</p>
+<p>2.LXC可以做什么</p>
+<p>LXC可以在操作系统层次上为进程提供的虚拟的执行环境一个虚拟的执行环境就是一个容器。可以为容器绑定特定的cpu和memory节点分配特定比例的cpu时间、IO时间限制可以使用的内存大小包括内存和是swap空间提供device访问控制提供独立的namespace网络、pid、ipc、mnt、uts。</p>
+<p>3.LXC如何实现</p>
+<p>Sourceforge上有LXC这个开源项目但是LXC项目本身只是一个为用户提供一个用户空间的工具集用来使用和管理LXC容器。LXC真正的实现则是靠Linux内核的相关特性LXC项目只是对此做了整合。基于容器的虚拟化技术起源于所谓的资源容器和安全容器。</p>
+<p>LXC在资源管理方面依赖与Linux内核的cgroups子系统cgroups子系统是Linux内核提供的一个基于进程组的资源管理的框架可以为特定的进程组限定可以使用的资源。LXC在隔离控制方面依赖于Linux内核的namespace特性具体而言就是在clone时加入相应的flagNEWNS NEWPID等等。</p>
+<p>4.为什么要选择LXC</p>
+<p>LXC是所谓的操作系统层次的虚拟化技术与传统的HAL硬件抽象层层次的虚拟化技术相比有以下优势</p>
+<p>更小的虚拟化开销LXC的诸多特性基本由内核特供而内核实现这些特性只有极少的花费具体分析有时间再说<br>快速部署。利用LXC来隔离特定应用只需要安装LXC即可使用LXC相关命令来创建并启动容器来为应用提供虚拟执行环境。传统的虚拟化技术则需要先创建虚拟机然后安装系统再部署应用。<br>LXC跟其他操作系统层次的虚拟化技术相比最大的优势在于LXC被整合进内核不用单独为内核打补丁。</p>
+<h3 id="四十三、docker的典型场景"><a href="#四十三、docker的典型场景" class="headerlink" title="四十三、docker的典型场景"></a>四十三、docker的典型场景</h3><p>自动化的应用程序的封装和部署<br>创建轻量级私有PaaS环境<br>自动化测试和持续集成/部署<br>部署和缩放网络应用程序数据库和后端服务</p>
+<h3 id="四十四、docker的局限之处"><a href="#四十四、docker的局限之处" class="headerlink" title="四十四、docker的局限之处"></a>四十四、docker的局限之处</h3><p>1、网络限制容器网络Docker Network 让你可以方便地在同一主机下对容器进行网络连接。加上一些其他的工作你就可以跨主机使用叠加网络功能。然而也就到此为止了。网络配置操作是受限的而且到目前为止可以说这些手段都是人工的。尽管容器脚本化可以规模化因为你必须给网络定义增加预分配实例每次提供容器时还需要额外步骤这容易引起错误。</p>
+<p>2、库控制受限库已经成为任何容器会话的中心议题。公共库是最有价值的因为他贡献了大量的预置容器节省了许多的配置时间。然而在沙盒里使用它是有风险的。在不知道谁以及如何创建镜像的情况下可能会存在任意数量的有意或无意的稳定性和安全性风险。对于企业来说有必要建立和维护一个私有库这个库的建立挑战不大但管理是个问题。Docker为大型库的镜像管理提供了一个有限的元数据模型确保未来实例如预期的能力受限也没有叠加功能。</p>
+<p>3、没有清晰的审计跟踪提供容器是很简单的但知道提供容器的时间、原因、方式以及提供方却不容易。因此在提供之后你并不掌握多少出于审计目的的历史。<br>运行实例的低可见性如果没有经过深思熟虑的行动实例提供后很难接触到运行容器的对象也很难知道哪些应该出现在那里哪些不应该出现在那里</p>
+<p>Docker并不是全能的设计之初也不是KVM之类虚拟化手段的替代品简单总结几点</p>
+<p>1、Docker是基于Linux 64bit的无法在32bit的linux/Windows/unix环境下使用</p>
+<p>2、LXC是基于cgroup等linux kernel功能的因此container的guest系统只能是linux base的</p>
+<p>3、隔离性相比KVM之类的虚拟化方案还是有些欠缺所有container公用一部分的运行库</p>
+<p>4、网络管理相对简单主要是基于namespace隔离</p>
+<p>5、cgroup的cpu和cpuset提供的cpu功能相比KVM的等虚拟化方案相比难以度量(所以dotcloud主要是按内存收费)</p>
+<p>6、docker对disk的管理比较有限</p>
+<p>7、container随着用户进程的停止而销毁container中的log等用户数据不便收集</p>
+<h3 id="四十五、用户如果选择适合自己的虚拟化"><a href="#四十五、用户如果选择适合自己的虚拟化" class="headerlink" title="四十五、用户如果选择适合自己的虚拟化"></a>四十五、用户如果选择适合自己的虚拟化</h3><p>用户需要考虑虚拟化方法尤其是硬件虚拟化方法需要借助其解决的主要是以下4个问题:<br>1、隔离性 - 每个用户实例之间相互隔离, 互不影响。 硬件虚拟化方法给出的方法是VM, LXC给出的方法是container更细一点是kernel namespace</p>
+<p>2、可配额/可度量 - 每个用户实例可以按需提供其计算资源所使用的资源可以被计量。硬件虚拟化方法因为虚拟了CPU, memory可以方便实现, LXC则主要是利用cgroups来控制资源</p>
+<p>3、移动性 - 用户的实例可以很方便地复制、移动和重建。硬件虚拟化方法提供snapshot和image来实现docker(主要)利用AUFS实现</p>
+<p>4、安全性 - 这个话题比较大这里强调是host主机的角度尽量保护container。硬件虚拟化的方法因为虚拟化的水平比较高用户进程都是在KVM等虚拟机容器中翻译运行的, 然而对于LXC, 用户的进程是lxc-start进程的子进程, 只是在Kernel的namespace中隔离的, 因此需要一些kernel的patch来保证用户的运行环境不会受到来自host主机的恶意入侵, dotcloud(主要是)利用kernel grsec patch解决的.</p>
+<h3 id="四十六、Linux-Namespace-ns"><a href="#四十六、Linux-Namespace-ns" class="headerlink" title="四十六、Linux Namespace (ns)"></a>四十六、Linux Namespace (ns)</h3><p>LXC所实现的隔离性主要是来自kernel的namespace, 其中pid, net, ipc, mnt, uts 等namespace将container的进程, 网络, 消息, 文件系统和hostname 隔离开。</p>
+<p>一、 pid namespace<br>之前提到用户的进程是lxc-start进程的子进程, 不同用户的进程就是通过pidnamespace隔离开的且不同 namespace 中可以有相同PID。具有以下特征:<br>1、每个namespace中的pid是有自己的pid=1的进程(类似/sbin/init进程)</p>
+<p>2、每个namespace中的进程只能影响自己的同一个namespace或子namespace中的进程</p>
+<p>3、因为/proc包含正在运行的进程因此在container中的pseudo-filesystem的/proc目录只能看到自己namespace中的进程</p>
+<p>4、因为namespace允许嵌套父namespace可以影响子namespace的进程所以子namespace的进程可以在父namespace中看到但是具有不同的pid</p>
+<p>正是因为以上的特征所有的LXC进程在docker中的父进程为docker进程每个lxc进程具有不同的namespace。同时由于允许嵌套因此可以很方便的实现 LXC in LXC<br>二、 net namespace<br>有了 pid namespace, 每个namespace中的pid能够相互隔离但是网络端口还是共享host的端口。网络隔离是通过netnamespace实现的<br>每个net namespace有独立的 network devices, IP addresses, IP routing tables, /proc/net 目录。这样每个container的网络就能隔离开来。<br>LXC在此基础上有5种网络类型docker默认采用veth的方式将container中的虚拟网卡同host上的一个docker bridge连接在一起。</p>
+<p>三、 ipc namespace<br>container中进程交互还是采用linux常见的进程间交互方法(interprocess communication - IPC), 包括常见的信号量、消息队列和共享内存。然而同VM不同container 的进程间交互实际上还是host上具有相同pid namespace中的进程间交互因此需要在IPC资源申请时加入namespace信息 - 每个IPC资源有一个唯一的 32bit ID。</p>
+<p>四、 mnt namespace<br>类似chroot将一个进程放到一个特定的目录执行。mnt namespace允许不同namespace的进程看到的文件结构不同这样每个 namespace 中的进程所看到的文件目录就被隔离开了。同chroot不同每个namespace中的container在/proc/mounts的信息只包含所在namespace的mount point。</p>
+<p>五、 uts namespace<br>UTS(“UNIX Time-sharing System”) namespace允许每个container拥有独立的hostname和domain name, 　　使其在网络上可以被视作一个独立的节点而非Host上的一个进程。</p>
+<p>六 、 user namespace<br>每个container可以有不同的 user 和 group id, 也就是说可以以container内部的用户在container内部执行程序而非Host上的用户。<br>有了以上6种namespace从进程、网络、IPC、文件系统、UTS和用户角度的隔离一个container就可以对外展现出一个独立计算机的能力并且不同container从OS层面实现了隔离。 　　然而不同namespace之间资源还是相互竞争的仍然需要类似ulimit来管理每个container所能使用的资源 - LXC 采用的是cgroup。</p>
+<h3 id="四十七、Control-Groups-cgroups"><a href="#四十七、Control-Groups-cgroups" class="headerlink" title="四十七、Control Groups (cgroups)"></a>四十七、Control Groups (cgroups)</h3><pre><code>cgroups 实现了对资源的配额和度量。 cgroups 的使用非常简单提供类似文件的接口在 /cgroup目录下新建一个文件夹即可新建一个group在此文件夹中新建task文件并将pid写入该文件即可实现对该进程的资源控制。
+</code></pre><p>具体的资源配置选项可以在该文件夹中新建子 subsystem {子系统前缀}.{资源项} 是典型的配置方法<br>如memory.usage_in_bytes 就定义了该group 在subsystem memory中的一个内存限制选项。<br>另外cgroups中的 subsystem可以随意组合一个subsystem可以在不同的group中也可以一个group包含多个subsystem - 也就是说一个 subsystem。</p>
+<p>我们主要关心cgroups可以限制哪些资源即有哪些subsystem是我们关心。</p>
+<p>cpu : 在cgroup中并不能像硬件虚拟化方案一样能够定义CPU能力但是能够定义CPU轮转的优先级因此具有较高CPU优先级的进程会更可能得到CPU运算。 　　通过将参数写入cpu.shares,即可定义改cgroup的CPU优先级 - 这里是一个相对权重而非绝对值。当然在cpu这个subsystem中还有其他可配置项手册中有详细说明。</p>
+<p>cpusets : cpusets 定义了有几个CPU可以被这个group使用或者哪几个CPU可以供这个group使用。在某些场景下单CPU绑定可以防止多核间缓存切换从而提高效率</p>
+<p>memory : 内存相关的限制</p>
+<p>blkio : block IO相关的统计和限制byte/operation统计和限制(IOPS等)读写速度限制等但是这里主要统计的都是同步IO</p>
+<p>net_cls cpuacct , devices , freezer 等其他可管理项。</p>
+<h3 id="四十八、把用户应用程序迁往Docker容器"><a href="#四十八、把用户应用程序迁往Docker容器" class="headerlink" title="四十八、把用户应用程序迁往Docker容器"></a>四十八、把用户应用程序迁往Docker容器</h3><p>步骤1分解</p>
+<p>一般来说应用程序都是复杂的它们都有很多的组件。例如大多数应用程序都需要数据库或中间件服务的支持以实现对数据的存储、检索和集成。所以需要通过设计和部署把这些服务拆分成为它们自己的容器。如果一个应用程序能够被拆分成为越多的分布式组件那么应用程序扩展的选择则越多。但是分布式组件越多也意味着管理的复杂性越高。</p>
+<p>步骤2选择一个基础映像</p>
+<p>当执行应用程序迁移时应尽量避免推倒重来的做法。搜索Docker注册库找到一个基本的Docker映像并将其作为应用程序的基础来使用。<br>随着时间的推移企业将会发现这些Docker注册库中基本映像的价值所在。请记住Docker支持着一个Docker开发人员社区所以项目的成功与否很大程度上取决于用户对于映像管理和改良的参与度。</p>
+<p>步骤3解决安全性和管理问题</p>
+<p>安全性和管理应当是一个高优先级的考虑因素企业用户不应再把它们当作应用程序迁移至容器的最后一步。反之企业必须从一开始就做好安全性和管理的规划把它们的功能纳入应用程序的开发过程中并在应用程序运行过程中积极主动地关注这些方面。这就是企业应当花大功夫的地方。<br>基于容器的应用程序是分布式应用程序。企业应当更新较老的应用程序以支持联合身份管理方法这将非常有利于确保分布式应用程序的安全性。为了做到这一点应为每一个应用程序组件和数据提供一个唯一的标识符这个标识符可允许企业在一个细粒度的级别上进行安全性管理。企业用户还应当增加一个日志记录的方法。</p>
+<p>步骤4增加代码</p>
+<p>为了创建映像企业用户需要使用一个Dockerfile来定义映像开发的必要步骤。一旦创建了映像企业用户就应将其添加至Docer Hub。</p>
+<p>步骤5配置、测试、部署</p>
+<p>应对在容器中运行的应用程序进行配置以便于让应用程序知道可以在哪里连接外部资源或者应用程序集群中的其他容器。企业用户可以把这些配置部署在容器中或使用环境变量。<br>对基于容器的应用程序进行测试类似于对其他分布式应用程序的测试。企业可以对每个容器进行组件测试并将容器集群作为一个整体进行测试。 确定应用程序应如何能够在负载增加的情况下进行扩展。如果用户正在使用一个集群管理器例如Swarm则可测试其性能。<br>最后把容器部署到实际生产环境中。为了积极主动地关注基于容器的应用程序的运行状况可考虑实施必要的监控和管理机制 。确保打开日志记录功能。<br>很多应用程序迁移至云计算都是采用容器技术的。虽然迁移有一点复杂但是容器可以保护应用程序投资并赋予了它一个更长的使用寿命。</p>
+<p>总结相对于 docker简明教程一 docker简明教程二会让大家看的更加过瘾也能让大家在思想上更上一层楼。谢谢大家支持如果喜欢的话会有 docker简明教程三。。。。。。<br>还是那句话希望大家可以坚持自己的梦想  同时也是勉励自己</p>
+<p>本文出自 “付炜超” 博客，请务必保留此出处<a href="http://9399369.blog.51cto.com/9389369/1758752" target="_blank" rel="external">http://9399369.blog.51cto.com/9389369/1758752</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://hack70.com/2016/10/09/022docker-jianmin2/" data-id="cj1rrp6ke001n28yjj3gl1jh6" class="article-share-link">分享到</a><div class="tags"><a href="/tags/docker/">docker</a></div><div class="post-nav"><a href="/2016/10/11/023docker-rumen-jingtong/" class="pre">docker从入门到精通</a><a href="/2016/10/09/021docker-jianmin1/" class="next">docker简明教程一</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://hack70.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/forensics/">forensics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hack/">hack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/wireless/" style="font-size: 15px;">wireless</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/免流/" style="font-size: 15px;">免流</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/manjaro/" style="font-size: 15px;">manjaro</a> <a href="/tags/梅林/" style="font-size: 15px;">梅林</a> <a href="/tags/raspberry/" style="font-size: 15px;">raspberry</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/vps/" style="font-size: 15px;">vps</a> <a href="/tags/genymotion/" style="font-size: 15px;">genymotion</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/025genymotion/">genymotion的那些事儿</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/27/024linux-hydra/">linux下的暴力密码在线破解工具hydra详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/023docker-rumen-jingtong/">docker从入门到精通</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/022docker-jianmin2/">docker简明教程二</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/021docker-jianmin1/">docker简明教程一</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/021bandwagon-chacha/">搬瓦工shadowsocks启用chacha加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/020bandwagon-speed/">搬瓦工安装netspeed提速</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/019mobile-forensics/">五、手机取证</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/018fafa2016-22/">关于办理刑事案件收集提取和审查判断电子数据若干问题的规定</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/017user-add/">linux下新建用户</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.douban.com/" title="douban" target="_blank">douban</a><ul></ul><a href="http://www.v2ex.com/" title="v2ex" target="_blank">v2ex</a><ul></ul><a href="http://www.github.com/" title="github" target="_blank">github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">hack70.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

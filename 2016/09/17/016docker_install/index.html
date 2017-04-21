@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>docker安装和部署 | hack70</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">docker安装和部署</h1><a id="logo" href="/.">hack70</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">docker安装和部署</h1><div class="post-meta">Sep 17, 2016<span> | </span><span class="category"><a href="/categories/linux/">linux</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><h2 id="一、docker的安装和部署"><a href="#一、docker的安装和部署" class="headerlink" title="一、docker的安装和部署"></a>一、docker的安装和部署</h2><p>ubuntu下安装</p>
+<p>windows下安装</p>
+<p>mac下安装</p>
+<a id="more"></a>
+<h2 id="二、在ubuntu下安装docker"><a href="#二、在ubuntu下安装docker" class="headerlink" title="二、在ubuntu下安装docker"></a>二、在ubuntu下安装docker</h2><h3 id="支持版本"><a href="#支持版本" class="headerlink" title="支持版本"></a>支持版本</h3><p>12.04   13.04   13.10     14.04.   ,  64 bit</p>
+<p>内核 3.10以上</p>
+<h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><ol>
+<li><p>内核版本： unnamed -a</p>
+</li>
+<li><p>检查 device mapper.   （驱动文件是否存在）</p>
+</li>
+</ol>
+<p>Ls -l /sys/cbass/misc/device-mapper</p>
+<h3 id="安装Ubuntu-维护的版本"><a href="#安装Ubuntu-维护的版本" class="headerlink" title="安装Ubuntu 维护的版本"></a>安装Ubuntu 维护的版本</h3><p>sudo apt-get install docker.io</p>
+<p>Scource /etc/bash_completion.d/docker.io     更新配置</p>
+<h3 id="安装docker维护的版本"><a href="#安装docker维护的版本" class="headerlink" title="安装docker维护的版本"></a>安装docker维护的版本</h3><p>Sudo apt-get install -y curl</p>
+<p>Curl -sSL <a href="https://get.docker.com/Ubuntu/" target="_blank" rel="external">https://get.docker.com/Ubuntu/</a> | sudo sh</p>
+<h3 id="实例应用"><a href="#实例应用" class="headerlink" title="实例应用"></a>实例应用</h3><p>Sudo docker run Ubuntu echo ‘Hello World’</p>
+<h3 id="加入docker组"><a href="#加入docker组" class="headerlink" title="加入docker组"></a>加入docker组</h3><p>sudo group add docker</p>
+<p>Sudo gpasswd -a username docker</p>
+<p>Sudo service docker restart</p>
+<h2 id="三、windows下安装docker"><a href="#三、windows下安装docker" class="headerlink" title="三、windows下安装docker"></a>三、windows下安装docker</h2><h3 id="boot2docker-for-windows-包含"><a href="#boot2docker-for-windows-包含" class="headerlink" title="boot2docker for windows 包含"></a>boot2docker for windows 包含</h3><ol>
+<li><p><a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="external">https://github.com/boot2docker/boot2docker</a></p>
+</li>
+<li><p>下载docker-install.exe</p>
+</li>
+<li><p>安装docker-install.exe</p>
+</li>
+</ol>
+<h3 id="实例应用-1"><a href="#实例应用-1" class="headerlink" title="实例应用"></a>实例应用</h3><p>docker run ubuntu echo ‘Hello World’</p>
+<p>unable to find image ‘ubuntu:latest’ locally</p>
+<p>然后会自动下载ubuntu镜像</p>
+<h2 id="四、mac下安装docker—boot2docker"><a href="#四、mac下安装docker—boot2docker" class="headerlink" title="四、mac下安装docker—boot2docker"></a>四、mac下安装docker—boot2docker</h2><blockquote>
+<p>boot2docker=轻量级linux+virtualbox+docker客户端+管理工具</p>
+</blockquote>
+<h3 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h3><p>os x 10.6 snow leopard 之后的系统</p>
+<h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><ol>
+<li><p><a href="https://github.com/bootsdocker/bootsdocker" target="_blank" rel="external">https://github.com/bootsdocker/bootsdocker</a></p>
+</li>
+<li><p>下载 boot2docker-1.5.0.pkg</p>
+</li>
+<li><p>安装 bootsdocker-1.5.0.pkg</p>
+</li>
+</ol>
+<h3 id="bootsdocker启动过程"><a href="#bootsdocker启动过程" class="headerlink" title="bootsdocker启动过程"></a>bootsdocker启动过程</h3><ol>
+<li><p>打开命令行通道</p>
+</li>
+<li><p>建立$HOME/.bootsdocker 目录</p>
+</li>
+<li><p>创建virtualbox ISO</p>
+</li>
+<li><p>启动虚拟机并运行docker守护进程</p>
+</li>
+</ol>
+<h3 id="进入守护进程虚拟机命令"><a href="#进入守护进程虚拟机命令" class="headerlink" title="进入守护进程虚拟机命令"></a>进入守护进程虚拟机命令</h3><p>boot2docker ssh</p>
+<p>其他命令查看  boot2docker  help</p>
+<h3 id="实例应用-2"><a href="#实例应用-2" class="headerlink" title="实例应用"></a>实例应用</h3><p>docker run ubuntu echo ‘Hello World’</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://hack70.com/2016/09/17/016docker_install/" data-id="cj1rrp6gj000y28yjxdrvn3mj" class="article-share-link">分享到</a><div class="tags"><a href="/tags/docker/">docker</a></div><div class="post-nav"><a href="/2016/09/18/017user-add/" class="pre">linux下新建用户</a><a href="/2016/09/17/015enter_docker/" class="next">走进docker</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://hack70.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/forensics/">forensics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hack/">hack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/wireless/" style="font-size: 15px;">wireless</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/免流/" style="font-size: 15px;">免流</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/manjaro/" style="font-size: 15px;">manjaro</a> <a href="/tags/梅林/" style="font-size: 15px;">梅林</a> <a href="/tags/raspberry/" style="font-size: 15px;">raspberry</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/vps/" style="font-size: 15px;">vps</a> <a href="/tags/genymotion/" style="font-size: 15px;">genymotion</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/025genymotion/">genymotion的那些事儿</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/27/024linux-hydra/">linux下的暴力密码在线破解工具hydra详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/023docker-rumen-jingtong/">docker从入门到精通</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/022docker-jianmin2/">docker简明教程二</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/021docker-jianmin1/">docker简明教程一</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/021bandwagon-chacha/">搬瓦工shadowsocks启用chacha加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/020bandwagon-speed/">搬瓦工安装netspeed提速</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/019mobile-forensics/">五、手机取证</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/018fafa2016-22/">关于办理刑事案件收集提取和审查判断电子数据若干问题的规定</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/017user-add/">linux下新建用户</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.douban.com/" title="douban" target="_blank">douban</a><ul></ul><a href="http://www.v2ex.com/" title="v2ex" target="_blank">v2ex</a><ul></ul><a href="http://www.github.com/" title="github" target="_blank">github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">hack70.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>docker简明教程一 | hack70</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">docker简明教程一</h1><a id="logo" href="/.">hack70</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">docker简明教程一</h1><div class="post-meta">Oct 9, 2016<span> | </span><span class="category"><a href="/categories/linux/">linux</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p>作者：付炜超  qq：961769710</p>
+<p>前言：去年寒假的时候萌生的把自己对于docker的理解写成简明教程的样子，想用最直白的言语给大家展示出现在特别火的docker技术，以下的所以内容都是本人写的，绝非复制、粘贴。如果觉得我写的好，对大家有用的话，希望能上推荐博客。我会在近段时间把部分二展示出来，这一次展示的信息量我想大家需要消化几天。谢谢51cto这个平台，能让我把自己会的知识分享给更多的爱技术的人。</p>
+<h3 id="一、Docker简介"><a href="#一、Docker简介" class="headerlink" title="一、Docker简介"></a>一、Docker简介</h3><p>Docker是基于GO语言实现的云开源项目，诞生于2013年初。<br>Docker引擎的基础是linux容器（LXC）技术。<br>Docker的好处：通过容器打包应用。迁移的话节约时间，降低部署过程中出现风险。<br>Docker在运维中的优势：一次创建或配置，终身可以使用<br>Docker与虚拟机的比较：更快、对资源需求更少、指令简单，学习成本低、Dockerfile</p>
+<h3 id="二、Docker镜像"><a href="#二、Docker镜像" class="headerlink" title="二、Docker镜像"></a>二、Docker镜像</h3><p>Docker镜像是一个面向Docker引擎的只读模板，它是创建Docker容器的基础。</p>
+<p>可以下载一个centos的系统镜像<br>也可以下载一个包含lamp软件的镜像</p>
+<h3 id="三、Docker容器"><a href="#三、Docker容器" class="headerlink" title="三、Docker容器"></a>三、Docker容器</h3><p>Docker利用容器来运行和隔离应用<br>容器是镜像的实例。可以启动、开始、停止、删除。<br>镜像自身是只读的，容器从镜像启动，Docker会在镜像最上层创建一个可写层，镜像本身保持不变。</p>
+<h3 id="四、Docker仓库"><a href="#四、Docker仓库" class="headerlink" title="四、Docker仓库"></a>四、Docker仓库</h3><p>Docker集中存放镜像的文件的地方。<br>分为两种：共有的、私有的。</p>
+<h3 id="五、Docker安装"><a href="#五、Docker安装" class="headerlink" title="五、Docker安装"></a>五、Docker安装</h3><p>我用的是centos7 的系统。<br>直接使用系统自带的yum源就可以，redhat需要自己设置。<br>[root@docker ~]# yum install docker -y</p>
+<p>测试：</p>
+<p>[root@docker ~]# docker<br>Usage: docker [OPTIONS] COMMAND [arg…]<br>docker daemon [ –help | … ]<br>docker [ –help | -v | –version ]</p>
+<p>直接在命令行敲dokcer会有很多输出，为了节省篇幅，我只截取了一部分</p>
+<h3 id="六、Docker镜像查找"><a href="#六、Docker镜像查找" class="headerlink" title="六、Docker镜像查找"></a>六、Docker镜像查找</h3><p>docker查找镜像命令很简单<br>首先要启动docker<br>/bin/systemctl start docker.service</p>
+<p>查找某一个我们需要的镜像</p>
+<p>[root@docker ~]# docker search lamp<br>INDEX NAME DESCRIPTION STARS OFFICIAL AUTOMATED<br>docker.io docker.io/reinblau/lamp Dockerfile for PHP-Projects with MySql client 15 [OK]</p>
+<p>会有很多输出，但是我为了省地方，那个数字（15）越大 它越受欢迎！</p>
+<h3 id="七、Docker镜像获取"><a href="#七、Docker镜像获取" class="headerlink" title="七、Docker镜像获取"></a>七、Docker镜像获取</h3><p>获取docker镜像 docker pull name[:tag] tag标签是版本号。</p>
+<p>[root@docker ~]# docker pull ubuntu<br>Using default tag: latest<br>Trying to pull repository docker.io/library/ubuntu … latest: Pulling from library/ubuntu<br>。。。。。</p>
+<p>可以看到，如果不加标签 默认是 latest</p>
+<h3 id="八、Docker查看那本地镜像信息"><a href="#八、Docker查看那本地镜像信息" class="headerlink" title="八、Docker查看那本地镜像信息"></a>八、Docker查看那本地镜像信息</h3><p>我们可以利用docker images 查看本地镜像信息，方便我们使用<br>[root@docker ~]# docker images<br>REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE<br>docker.io/ubuntu latest af88597ec24b 39 hours ago 187.9 MB<br>[root@docker ~]#</p>
+<p>列出的信息有 镜像名、标签、镜像id、创建的时间、 大小。</p>
+<h3 id="九、Docker镜像使用"><a href="#九、Docker镜像使用" class="headerlink" title="九、Docker镜像使用"></a>九、Docker镜像使用</h3><p>当镜像从镜像站下载到本地以后我们就可以使用了</p>
+<p>[root@docker ~]# docker run -t -i docker.io/ubuntu /bin/bash<br>root@5dbb944ba21f:/#</p>
+<p>-t选项让docker分配一个伪终端并且绑定到容器的标准输入上，-i 让标准输入保持打开。</p>
+<p>让你体验一下docker的神奇之处！！！！！</p>
+<p>root@5dbb944ba21f:/# top<br>top - 10:29:55 up 1:02, 0 users, load average: 0.01, 0.06, 0.09<br>Tasks: 2 total, 1 running, 1 sleeping, 0 stopped, 0 zombie<br>%Cpu(s): 0.0 us, 0.3 sy, 0.0 ni, 99.7 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st<br>KiB Mem: 1003164 total, 832668 used, 170496 free, 1820 buffers<br>KiB Swap: 1048572 total, 0 used, 1048572 free. 389104 cached Mem</p>
+<p>PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND<br>1 root 20 0 18164 1976 1496 S 0.0 0.2 0:00.08 bash<br>16 root 20 0 19740 1316 1012 R 0.0 0.1 0:00.00 top</p>
+<p>看到没 就bash 和top两个进程！！！！！</p>
+<h3 id="十、Docker镜像删除"><a href="#十、Docker镜像删除" class="headerlink" title="十、Docker镜像删除"></a>十、Docker镜像删除</h3><p>对于我们不再使用的镜像我们可以删除节省空间。<br>[root@docker ~]# docker rmi -f docker.io/ubuntu<br>Untagged: docker.io/ubuntu:latest<br>Deleted: af88597ec24be1eb2028ec63fadae21be693428196a917fa24632ec41a791754<br>Deleted: b2ae0a712b396bf106bd301a41bbff642bd6dfa861596092ac34513b36425241<br>Deleted: 02e5bca4149be0f122442345d3aa3bcec2498b07692c48415bcaeaeb970c712c<br>Deleted: 895b070402bd7d26d9595e939422c598e8cc1f4ade1b34e2a9659138ffe3c5c9</p>
+<p>测试：<br>[root@docker ~]# docker images<br>REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE<br>[root@docker ~]#</p>
+<p>再次查看那本地的镜像我们可以发现原来的那个 镜像被删除了。</p>
+<h3 id="十一、Docker利用已有的镜像容器创建你自己的镜像"><a href="#十一、Docker利用已有的镜像容器创建你自己的镜像" class="headerlink" title="十一、Docker利用已有的镜像容器创建你自己的镜像"></a>十一、Docker利用已有的镜像容器创建你自己的镜像</h3><p>首先利用docker.io/ubuntu:latest镜像进入一个容器<br>[root@docker ~]# docker run -ti docker.io/ubuntu:latest /bin/bash</p>
+<p>然后在里面创建一个fwc的目录</p>
+<p>root@6378eb77bbdf:/# mkdir fwc</p>
+<p>查看我们的创建</p>
+<p>root@6378eb77bbdf:/# ls<br>bin dev fwc lib media opt root sbin sys usr<br>boot etc home lib64 mnt proc run srv tmp var</p>
+<p>推出容器，记住容器id<br>root@6378eb77bbdf:/# exit</p>
+<p>容器id不用全部记住，记一部分就行！</p>
+<p>利用提交，创建一个新的镜像</p>
+<p>[root@docker ~]# docker commit -m “mkdir fwc dirctory” -a “fuchao” 6378eb77b fuchao<br>上面的是命令，下面的是输出。<br>8be9f7652ab5d402033dda3d0ba661f540a5111371b7ef03241407f8418d2fd3</p>
+<p>-m：后面跟的是提交的信息<br>-a：后面跟的是作者。</p>
+<p>现在我们可以查看本地的镜像了</p>
+<p>[root@docker ~]# docker images<br>REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE<br>fuchao latest 8be9f7652ab5 11 seconds ago 202.3 MB<br>docker.io/ubuntu latest af88597ec24b 41 hours ago 187.9 MB</p>
+<p>可以看到多了一个fuchao的镜像。</p>
+<h3 id="十二、Docker把镜像存成本地文件"><a href="#十二、Docker把镜像存成本地文件" class="headerlink" title="十二、Docker把镜像存成本地文件"></a>十二、Docker把镜像存成本地文件</h3><p>我们可以把上一篇教程中的fuchao 镜像存成本地文件。</p>
+<p>[root@docker ~]# docker save -o fuchao_latest fuchao:latest</p>
+<p>测试：</p>
+<p>[root@docker ~]# ls<br>anaconda-ks.cfg fuchao_latest<br>[root@docker ~]#</p>
+<p>可以看到本地已经生成了 fuchao_latest文件。</p>
+<h3 id="十三、Docker把本地文件导入本地镜像库"><a href="#十三、Docker把本地文件导入本地镜像库" class="headerlink" title="十三、Docker把本地文件导入本地镜像库"></a>十三、Docker把本地文件导入本地镜像库</h3><p>首先删除原有的镜像</p>
+<p>[root@docker ~]# docker rmi fuchao<br>Untagged: fuchao:latest<br>Deleted: 8be9f7652ab5d402033dda3d0ba661f540a5111371b7ef03241407f8418d2fd3</p>
+<p>查看那本地镜像库</p>
+<p>[root@docker ~]# docker images<br>REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE<br>docker.io/ubuntu latest af88597ec24b 41 hours ago 187.9 MB<br>docker.io/centos latest 60e65a8e4030 12 days ago 196.6 MB</p>
+<p>把本地文件导入到本地镜像库</p>
+<p>[root@docker ~]# docker load &lt; fuchao_latest</p>
+<p>测试：</p>
+<p>[root@docker ~]# docker images<br>REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE<br>fuchao latest 8be9f7652ab5 19 minutes ago 202.3 MB<br>docker.io/ubuntu latest af88597ec24b 41 hours ago 187.9 MB<br>docker.io/centos latest 60e65a8e4030 12 days ago 196.6 MB</p>
+<h3 id="十四、Docker给镜像创建标签"><a href="#十四、Docker给镜像创建标签" class="headerlink" title="十四、Docker给镜像创建标签"></a>十四、Docker给镜像创建标签</h3><p>给镜像创建标签<br>[root@docker ~]# docker tag fuchao:latest fuchao_push:latest</p>
+<p>测试：查看</p>
+<p>[root@docker ~]# docker images<br>REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE<br>fuchao latest 8be9f7652ab5 40 minutes ago 202.3 MB<br>fuchao_push latest 8be9f7652ab5 40 minutes ago 202.3 MB</p>
+<h3 id="十五、Docker中上传本地镜像到DockerHub中"><a href="#十五、Docker中上传本地镜像到DockerHub中" class="headerlink" title="十五、Docker中上传本地镜像到DockerHub中"></a>十五、Docker中上传本地镜像到DockerHub中</h3><p>首先，你需要注册一个帐号。</p>
+<p>想要上传的话首先要登录<br>[root@docker ~]# docker login<br>Username: fwc521<br>Password:<br>Email: 961769710@qq.com<br>WARNING: login credentials saved in /root/.docker/config.json<br>Login Succeeded<br>[root@docker ~]#</p>
+<p>登录成功，接下来就可以了</p>
+<p>[root@docker ~]# docker push fwc521/latest</p>
+<p>Do you really want to push to public registry? [y/n]: y<br>The push refers to a repository [docker.io/fwc521/latest] (len: 0)<br>8be9f7652ab5: Pushed</p>
+<p>fwc521 是我的帐号</p>
+<h3 id="十六、Docker创建容器"><a href="#十六、Docker创建容器" class="headerlink" title="十六、Docker创建容器"></a>十六、Docker创建容器</h3><p>Docker创建容器<br>root@docker ~]# docker create -it docker.io/ubuntu:latest<br>5bd73ca9dcdb9f5ba8b01ad56662ef16482044801e1224528ded8b4bff42becc</p>
+<p>查看容器进程<br>[root@docker ~]# docker ps -a<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>5bd73ca9dcdb docker.io/ubuntu:latest “/bin/bash” 9 seconds ago Created</p>
+<p>启动创建的容器<br>[root@docker ~]# docker start 5bd73ca9dcd<br>5bd73ca9dcd<br>再次查看容器进程<br>[root@docker ~]# docker ps -a<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>5bd73ca9dcdb docker.io/ubuntu:latest “/bin/bash” 3 minutes ago Up 8 seconds sad_brahmagupta</p>
+<p>Docker新建并启动容器</p>
+<p>[root@docker ~]# docker run -t -i docker.io/ubuntu:latest /bin/bash<br>root@11c1437847cb:/#</p>
+<h3 id="十七、Docker终止容器"><a href="#十七、Docker终止容器" class="headerlink" title="十七、Docker终止容器"></a>十七、Docker终止容器</h3><p>终止运行中的容器<br>[root@docker ~]# docker stop 5bd73ca9d<br>5bd73ca9d</p>
+<p>要知道容器的id的一部分，（可以唯一的辨识出容器！）</p>
+<p>测试：查看</p>
+<p>[root@docker ~]# docker ps -a<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>11c1437847cb docker.io/ubuntu:latest “/bin/bash” 2 minutes ago Exited (0) 21 seconds ago mad_fermi<br>5bd73ca9dcdb docker.io/ubuntu:latest “/bin/bash” 10 minutes ago Exited (0) 9 seconds ago sad_brahmagupta</p>
+<p>可以看到第二个 5d开头的已经终止了。</p>
+<h3 id="十八、Docker启动终止的容器"><a href="#十八、Docker启动终止的容器" class="headerlink" title="十八、Docker启动终止的容器"></a>十八、Docker启动终止的容器</h3><p>启动终止状态的容器<br>[root@docker ~]# docker start 5bd73<br>5bd73</p>
+<p>测试：查看</p>
+<p>[root@docker ~]# docker ps<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>5bd73ca9dcdb docker.io/ubuntu:latest “/bin/bash” 19 minutes ago Up 8 seconds sad_brahmagupta<br>[root@docker ~]#</p>
+<p>可以看到上一篇我们终止 的容器现在已经启动了</p>
+<p>重启容器</p>
+<p>[root@docker ~]# docker restart 5bd73<br>5bd73<br>[root@docker ~]# docker ps<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>5bd73ca9dcdb docker.io/ubuntu:latest “/bin/bash” 22 minutes ago Up 4 seconds sad_brahmagupta<br>[root@docker ~]#</p>
+<h3 id="十九、Docker守护状态进行"><a href="#十九、Docker守护状态进行" class="headerlink" title="十九、Docker守护状态进行"></a>十九、Docker守护状态进行</h3><p>Docker以守护状态运行<br>[root@docker ~]# docker run -d docker.io/ubuntu:latest /bin/sh -c “while true;do echo fwc; \</p>
+<p>sleep 1;done”<br>9cd3a0312b95f3ff52138547a983ea16bb2fa3a0d5cb8f4b198a515ae0fd71e6<br>查看容器信息<br>[root@docker ~]# docker ps<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>9cd3a0312b95 docker.io/ubuntu:latest “/bin/sh -c ‘while tr” 5 seconds ago Up 3 seconds elated_lalande</p>
+<p>获取容器输出信息</p>
+<p>[root@docker ~]# docker logs 9cd3a031<br>fwc<br>fwc<br>fwc<br>fwc<br>fwc<br>fwc</p>
+<h3 id="二十、Docker-进去到运行的容器里"><a href="#二十、Docker-进去到运行的容器里" class="headerlink" title="二十、Docker 进去到运行的容器里"></a>二十、Docker 进去到运行的容器里</h3><p>首先查找到一个运行的容器</p>
+<p>[root@docker ~]# docker ps -a<br>5bd73ca9dcdb docker.io/ubuntu:latest “/bin/bash” 36 minutes ago Up 14 minutes sad_brahmagupta</p>
+<p>进入</p>
+<p>[root@docker ~]# docker exec -ti 5bd73ca9dcdb /bin/bash<br>root@5bd73ca9dcdb:/#</p>
+<h3 id="二十一、Docker删除容器"><a href="#二十一、Docker删除容器" class="headerlink" title="二十一、Docker删除容器"></a>二十一、Docker删除容器</h3><p>删除终止状态的容器</p>
+<p>首先找到一个终止 状态的容器</p>
+<p>[root@docker ~]# docker ps -a<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>9cd3a0312b95 docker.io/ubuntu:latest “/bin/sh -c ‘while tr” 11 minutes ago Exited (0) 5 minutes ago elated_lalande</p>
+<p>删除</p>
+<p>[root@docker ~]# docker rm 9cd3a0312b95<br>9cd3a0312b95</p>
+<p>测试：查看</p>
+<p>[root@docker ~]# docker ps -a<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>2424fa7a5346 docker.io/ubuntu:latest “/bin/sh -c top” 14 minutes ago Exited (1) 14 minutes ago dreamy_ritchie<br>8c8420123536 docker.io/ubuntu:latest “/bin/sh” 15 minutes ago Exited (0) 15 minutes ago modest_banach<br>11c1437847cb docker.io/ubuntu:latest “/bin/bash” 35 minutes ago Exited (0) 32 minutes ago mad_fermi<br>5bd73ca9dcdb docker.io/ubuntu:latest “/bin/bash” 42 minutes ago Up 20 minutes sad_brahmagupta<br>6378eb77bbdf docker.io/ubuntu:latest “/bin/bash” 3 hours ago Exited (0) 3 hours ago berserk_bhaskara<br>940e7ebbb19d docker.io/ubuntu:latest “/bin/bash” 3 hours ago Exited (127) 3 hours ago desperate_mayer<br>5dbb944ba21f docker.io/ubuntu “/bin/bash” 4 hours ago Exited (0) 4 hours ago hopeful_mahavira<br>[root@docker ~]#</p>
+<p>可以发现已经没有了。</p>
+<p>删除运行中的容器</p>
+<p>首先找到一个运行中的容器，从上面的测试输出可以发现 id是 5bd73ca9dcdb 的是运行状态的。</p>
+<p>删除：</p>
+<p>[root@docker ~]# docker rm -f 5bd73ca9dcdb<br>5bd73ca9dcdb<br>[root@docker ~]#</p>
+<p>测试：查看</p>
+<p>[root@docker ~]# docker ps -a<br>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES<br>2424fa7a5346 docker.io/ubuntu:latest “/bin/sh -c top” 18 minutes ago Exited (1) 18 minutes ago dreamy_ritchie<br>8c8420123536 docker.io/ubuntu:latest “/bin/sh” 19 minutes ago Exited (0) 19 minutes ago modest_banach<br>11c1437847cb docker.io/ubuntu:latest “/bin/bash” 38 minutes ago Exited (0) 36 minutes ago mad_fermi<br>6378eb77bbdf docker.io/ubuntu:latest “/bin/bash” 3 hours ago Exited (0) 3 hours ago berserk_bhaskara<br>940e7ebbb19d docker.io/ubuntu:latest “/bin/bash” 3 hours ago Exited (127) 3 hours ago desperate_mayer<br>5dbb944ba21f docker.io/ubuntu “/bin/bash” 4 hours ago Exited (0) 4 hours ago hopeful_mahavira<br>[root@docker ~]#</p>
+<p>可以发现已经没有了</p>
+<p>总结：上面的教程是我花费半个多月时间记录下来的，我不想用冗余的文字，我只想用最简单的大白话，和清楚的例子给大家展示docker的魅力！！！！希望大家可以坚持自己的梦想！！！</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://hack70.com/2016/10/09/021docker-jianmin1/" data-id="cj1rrp6lv001x28yjnixcup6i" class="article-share-link">分享到</a><div class="tags"><a href="/tags/docker/">docker</a></div><div class="post-nav"><a href="/2016/10/09/022docker-jianmin2/" class="pre">docker简明教程二</a><a href="/2016/10/08/021bandwagon-chacha/" class="next">搬瓦工shadowsocks启用chacha加密</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://hack70.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/forensics/">forensics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hack/">hack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/wireless/" style="font-size: 15px;">wireless</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/免流/" style="font-size: 15px;">免流</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/manjaro/" style="font-size: 15px;">manjaro</a> <a href="/tags/梅林/" style="font-size: 15px;">梅林</a> <a href="/tags/raspberry/" style="font-size: 15px;">raspberry</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/vps/" style="font-size: 15px;">vps</a> <a href="/tags/genymotion/" style="font-size: 15px;">genymotion</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/025genymotion/">genymotion的那些事儿</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/27/024linux-hydra/">linux下的暴力密码在线破解工具hydra详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/023docker-rumen-jingtong/">docker从入门到精通</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/022docker-jianmin2/">docker简明教程二</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/021docker-jianmin1/">docker简明教程一</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/021bandwagon-chacha/">搬瓦工shadowsocks启用chacha加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/020bandwagon-speed/">搬瓦工安装netspeed提速</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/019mobile-forensics/">五、手机取证</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/018fafa2016-22/">关于办理刑事案件收集提取和审查判断电子数据若干问题的规定</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/017user-add/">linux下新建用户</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.douban.com/" title="douban" target="_blank">douban</a><ul></ul><a href="http://www.v2ex.com/" title="v2ex" target="_blank">v2ex</a><ul></ul><a href="http://www.github.com/" title="github" target="_blank">github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">hack70.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
